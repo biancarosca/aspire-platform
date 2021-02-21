@@ -6,7 +6,8 @@
   "scripts": {
     "server": "nodemon backend/server",
     "client": "npm start --prefix frontend",
-    "dev": "concurrently \"npm run server\" \"npm run client\" "
+    "dev": "concurrently \"npm run server\" \"npm run client\" ",
+    "lint-files": "eslint . --ext .js"
   },
   "repository": {
     "type": "git",
@@ -21,10 +22,17 @@
   "homepage": "https://github.com/biancarosca/aspire-platform#readme",
   "devDependencies": {
     "concurrently": "^6.0.0",
+    "eslint": "^7.20.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-react": "^7.22.0",
     "nodemon": "^2.0.7"
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "typescript": "^4.1.5"
   }
 }
