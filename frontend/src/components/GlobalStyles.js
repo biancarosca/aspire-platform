@@ -55,4 +55,20 @@ export const StyBtn = styled(Link)`
 	border-radius: 5rem;
 `;
 
+export const StyInput = styled.input`
+	margin: 1.5rem 0;
+	outline: none;
+	border-top-style: hidden;
+	border-right-style: hidden;
+	border-left-style: hidden;
+	border-bottom-style: solid;
+	border-color: #434246;
+	padding: 0.3rem 0.5rem;
+	font-family: "Poppins", "sans-serif";
+	font-size: 16px;
+	&:focus {
+		border-color: #4347ea;
+	}
+`;
+
 export default GlobalStyles;

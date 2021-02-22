@@ -1,11 +1,10 @@
-import React, { useState, useRef } from "react";
-import { StyWrapper, StyBtn } from "../components/GlobalStyles";
+import React, { useState} from "react";
+import { StyWrapper, StyBtn, StyInput } from "../components/GlobalStyles";
 import LandingNav from "../components/LandingNav";
 import styled from "styled-components";
 
 const LoginPage = () => {
 	const [eyeOpen, setEyeOpen] = useState(false);
-	const passwordInputEl = useRef(null);
 
 	const toggleEye = () => {
 		setEyeOpen((prev) => !prev);
@@ -19,17 +18,16 @@ const LoginPage = () => {
 					<h1>Welcome!</h1>
 					<h3>Log in to continue</h3>
 					<form>
-						<input
-							ref={passwordInputEl}
+						<StyInput
 							type="text"
 							placeholder="Email"
-							size="30"
+							size="25"
 						/>
 						<div className="input-container">
-							<input
+							<StyInput
 								type={eyeOpen ? "text" : "password"}
 								placeholder="Password"
-								size="30"
+								size="25"
 								name="password"
 								autoComplete="on"
 							/>
@@ -98,21 +96,6 @@ const StyContainer = styled.div`
 		h3 {
 			font-size: 16px;
 			margin-bottom: 1rem;
-		}
-		input {
-			margin: 1.5rem 0;
-			outline: none;
-			border-top-style: hidden;
-			border-right-style: hidden;
-			border-left-style: hidden;
-			border-bottom-style: solid;
-			border-color: #434246;
-			padding: 0.3rem 0.5rem;
-			font-family: "Poppins", "sans-serif";
-			font-size: 16px;
-			&:focus {
-				border-color: #4347ea;
-			}
 		}
 	}
 `;

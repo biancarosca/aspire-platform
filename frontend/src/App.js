@@ -3,6 +3,7 @@ import LandingPage from "./pages/LandingPage";
 import GlobalStyles from "./components/GlobalStyles";
 import { Route, Switch } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
 
 function App() {
 	return (
@@ -10,7 +11,7 @@ function App() {
 			<GlobalStyles />
 			<Switch>
 				<Route path="/join" exact>
-					<h1>join</h1>
+					<SignupPage />
 				</Route>
 				<Route path="/login" exact>
 					<LoginPage />

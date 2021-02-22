@@ -91,7 +91,7 @@ const StyHambgMenu = styled(motion.div)`
 	height: 100vh;
 	width: auto;
 	background-color: white;
-	z-index: 0;
+	z-index: 1;
 	@media (max-width: 610px) {
 		display: flex;
 	}
