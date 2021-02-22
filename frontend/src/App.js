@@ -1,7 +1,8 @@
 import React from "react";
 import LandingPage from "./pages/LandingPage";
 import GlobalStyles from "./components/GlobalStyles";
-import { Route,Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
 	return (
@@ -12,7 +13,7 @@ function App() {
 					<h1>join</h1>
 				</Route>
 				<Route path="/login" exact>
-					<h1>login</h1>
+					<LoginPage />
 				</Route>
 				<Route path="/" exact>
 					<LandingPage />
