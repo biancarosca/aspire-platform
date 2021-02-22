@@ -18,6 +18,7 @@ const LandingPage = () => {
 	const variants = {
 		close0: {
 			opacity: 1,
+			x: "0%"
 		},
 		close: {
 			x: "-100%",
@@ -62,7 +63,6 @@ const LandingPage = () => {
 						animate={menuActive ? "open" : "close"}
 						transition={{ type: "tween", duration: 0.5 }}
 						variants={variants}
-						menuActive={menuActive}
 					>
 						<MenuItems menuActive={menuActive} />
 						<StyClose
@@ -215,7 +215,7 @@ const StyHambgMenu = styled(motion.div)`
 	background-color: white;
 	z-index: 0;
 	@media (max-width: 610px) {
-		display: ${(props) => (props.menuActive ? "flex" : "none")};
+		display: flex;
 	}
 `;
 
