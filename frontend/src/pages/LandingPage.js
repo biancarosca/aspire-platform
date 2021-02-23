@@ -24,7 +24,7 @@ const LandingPage = () => {
 							<StyBtn to="/join">Get started</StyBtn>
 						</div>
 					</div>
-					<img src={hero} alt="interview" />
+					<img src={hero} alt="interview"/>
 				</StyledHero>
 			</StyWrapper>
 		</>
@@ -35,6 +35,7 @@ const StyledHero = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	height: 50vh;
 	.info {
 		h1 {
 			margin-bottom: 1.5rem;

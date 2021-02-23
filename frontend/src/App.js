@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import RoleChoice from "./pages/RoleChoice";
+import CreateProfilePage from "./pages/CreateProfilePage";
 
 function App() {
 	return (
@@ -19,6 +20,9 @@ function App() {
 				</Route>
 				<Route path="/role" exact>
 					<RoleChoice />
+				</Route>
+				<Route path="/profile" exact>
+					<CreateProfilePage />
 				</Route>
 				<Route path="/" exact>
 					<LandingPage />
