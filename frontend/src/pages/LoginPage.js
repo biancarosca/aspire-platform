@@ -1,7 +1,8 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { StyWrapper, StyBtn, StyInput } from "../components/GlobalStyles";
 import LandingNav from "../components/LandingNav";
 import styled from "styled-components";
+import CTAbtn from "../components/CTAbtn";
 
 const LoginPage = () => {
 	const [eyeOpen, setEyeOpen] = useState(false);
@@ -12,17 +13,20 @@ const LoginPage = () => {
 
 	return (
 		<StyWrapper>
-			<LandingNav />
+			<LandingNav
+				menuItems={[
+					{ name: "Why Aspire?", path: "#" },
+					{ name: "Log In", path: "/login" },
+				]}
+			>
+				<CTAbtn />
+			</LandingNav>
 			<StyContainer>
 				<div className="wrapper">
 					<h1>Welcome!</h1>
 					<h3>Log in to continue</h3>
 					<form>
-						<StyInput
-							type="text"
-							placeholder="Email"
-							size="25"
-						/>
+						<StyInput type="text" placeholder="Email" size="25" />
 						<div className="input-container">
 							<StyInput
 								type={eyeOpen ? "text" : "password"}

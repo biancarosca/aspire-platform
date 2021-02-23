@@ -51,6 +51,7 @@ export const StyBtn = styled(Link)`
 	color: white;
 	background-color: #413feb;
 	margin-top: 1rem;
+	margin-bottom: 1.5rem;
 	padding: 0.5rem 3rem;
 	border-radius: 5rem;
 `;

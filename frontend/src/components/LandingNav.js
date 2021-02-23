@@ -7,8 +7,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
 import { StyWrapper } from "../components/GlobalStyles";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-const LandingNav = () => {
+const LandingNav = ({children, menuItems }) => {
 	const [menuActive, setMenuActive] = useState(null);
 
 	const openMenu = (value) => {
@@ -38,7 +39,9 @@ const LandingNav = () => {
 					<img src={logo} alt="Aspire logo" />
 					<span>Aspire</span>
 				</Link>
-				<MenuItems />
+				<MenuItems menuItems={menuItems} >
+					{React.Children.toArray(children)}
+				</MenuItems>
 				<StyBars icon={faBars} onClick={() => openMenu(true)}></StyBars>
 			</StyledNav>
 			{menuActive !== null && (
@@ -48,12 +51,22 @@ const LandingNav = () => {
 					transition={{ type: "tween", duration: 0.5 }}
 					variants={variants}
 				>
-					<MenuItems menuActive={menuActive} />
+					<MenuItems
+						menuActive={menuActive}
+						menuItems={menuItems}
+					>
+						{React.Children.toArray(children)}
+					</MenuItems>
 					<StyClose icon={faTimes} onClick={() => openMenu(false)} />
 				</StyHambgMenu>
 			)}
 		</StyWrapper>
 	);
+};
+
+LandingNav.propTypes = {
+	menuItems: PropTypes.array,
+	children: PropTypes.node
 };
 
 const StyledNav = styled.nav`

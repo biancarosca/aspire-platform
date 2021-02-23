@@ -3,26 +3,30 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
-const MenuItems = ({ menuActive }) => {
+const MenuItems = ({ children, menuActive, menuItems }) => {
 	return (
 		<StyUl menuActive={menuActive}>
-			<li>
-				<StyledLink to="#">Why Aspire?</StyledLink>
-			</li>
-			<li>
-				<StyledLink to="/login">Log In</StyledLink>
-			</li>
-			<li className="cta-btn">
-				<StyledLink to="/join" className="join">
-					Join
-				</StyledLink>
-			</li>
+			{menuItems.map((navElement, idx) => (
+				<li key={idx}>
+					<StyledLink to={navElement.path}>
+						{navElement.name}
+					</StyledLink>
+				</li>
+			))}
+			{React.Children.toArray(children)}
 		</StyUl>
 	);
 };
 
+MenuItems.defaultProps = {
+	menuActive: false,
+	menuItems: [],
+};
+
 MenuItems.propTypes = {
 	menuActive: PropTypes.bool,
+	menuItems: PropTypes.array,
+	children: PropTypes.node,
 };
 
 const StyUl = styled.ul`

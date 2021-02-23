@@ -2,20 +2,26 @@ import React from "react";
 import hero from "../images/hero.jpg";
 import styled from "styled-components";
 import { StyWrapper, StyBtn } from "../components/GlobalStyles";
-import LandingNav from "../components/LandingNav"; 
+import LandingNav from "../components/LandingNav";
+import CTAbtn from "../components/CTAbtn";
 
 const LandingPage = () => {
 	return (
 		<>
 			<StyWrapper>
-				<LandingNav />
+				<LandingNav
+					menuItems={[
+						{ name: "Why Aspire?", path: "#" },
+						{ name: "Log In", path: "/login" },
+					]}
+				>
+					<CTAbtn />
+				</LandingNav>
 				<StyledHero>
 					<div className="info">
 						<h1>Fastest link between developers and recruiters.</h1>
 						<div className="cta-btn">
-							<StyBtn to="/join">
-								Get started
-							</StyBtn>
+							<StyBtn to="/join">Get started</StyBtn>
 						</div>
 					</div>
 					<img src={hero} alt="interview" />
@@ -24,7 +30,6 @@ const LandingPage = () => {
 		</>
 	);
 };
-
 
 const StyledHero = styled.div`
 	display: flex;

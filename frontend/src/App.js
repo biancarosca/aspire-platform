@@ -4,6 +4,7 @@ import GlobalStyles from "./components/GlobalStyles";
 import { Route, Switch } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
+import RoleChoice from "./pages/RoleChoice";
 
 function App() {
 	return (
@@ -15,6 +16,9 @@ function App() {
 				</Route>
 				<Route path="/login" exact>
 					<LoginPage />
+				</Route>
+				<Route path="/role" exact>
+					<RoleChoice />
 				</Route>
 				<Route path="/" exact>
 					<LandingPage />

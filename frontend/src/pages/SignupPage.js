@@ -2,11 +2,19 @@ import React from "react";
 import { StyWrapper, StyBtn, StyInput } from "../components/GlobalStyles";
 import LandingNav from "../components/LandingNav";
 import styled from "styled-components";
+import CTAbtn from "../components/CTAbtn";
 
 const SignupPage = () => {
 	return (
 		<StyWrapper>
-			<LandingNav />
+			<LandingNav
+				menuItems={[
+					{ name: "Why Aspire?", path: "#" },
+					{ name: "Log In", path: "/login" },
+				]}
+			>
+				<CTAbtn />
+			</LandingNav>
 			<StyContainer>
 				<div className="wrapper">
 					<h1>Hi!</h1>
@@ -38,8 +46,7 @@ const SignupPage = () => {
 							autoComplete="on"
 						/>
 					</form>
-
-					<StyBtn to="" className="cta-btn">
+					<StyBtn to="/role" className="cta-btn">
 						Continue
 					</StyBtn>
 				</div>
