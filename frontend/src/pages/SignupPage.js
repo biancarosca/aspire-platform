@@ -1,8 +1,10 @@
 import React from "react";
+//components
 import { StyWrapper, StyBtn, StyInput } from "../components/GlobalStyles";
 import LandingNav from "../components/LandingNav";
 import styled from "styled-components";
 import CTAbtn from "../components/CTAbtn";
+import RoleChoice from "../components/RoleChoice";
 
 const SignupPage = () => {
 	return (
@@ -19,6 +21,10 @@ const SignupPage = () => {
 				<div className="wrapper">
 					<h1>Hi!</h1>
 					<h3>Create a new account</h3>
+					<div className="roles">
+						<RoleChoice roleName="recruiter" />
+						<RoleChoice roleName="developer" />
+					</div>
 					<form>
 						<StyInput
 							type="text"
@@ -75,6 +81,12 @@ const StyContainer = styled.div`
 		input {
 			display: block;
 		}
+	}
+	.roles {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		justify-content: flex-start;
 	}
 `;
 
