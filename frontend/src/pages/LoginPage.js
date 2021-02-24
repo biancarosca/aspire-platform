@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyWrapper, StyBtn, StyInput } from "../components/GlobalStyles";
+import { StyWrapper, StyBtn, StyInput,StyContainer } from "../components/GlobalStyles";
 import LandingNav from "../components/LandingNav";
 import styled from "styled-components";
 import CTAbtn from "../components/CTAbtn";
@@ -21,7 +21,7 @@ const LoginPage = () => {
 			>
 				<CTAbtn />
 			</LandingNav>
-			<StyContainer>
+			<StylContainer>
 				<div className="wrapper">
 					<h1>Welcome!</h1>
 					<h3>Log in to continue</h3>
@@ -56,21 +56,18 @@ const LoginPage = () => {
 								)}
 							</span>
 						</div>
+						<StyBtn type="submit" className="cta-btn">
+							Continue
+						</StyBtn>
 					</form>
 
-					<StyBtn to="" className="cta-btn">
-						Continue
-					</StyBtn>
 				</div>
-			</StyContainer>
+			</StylContainer>
 		</StyWrapper>
 	);
 };
 
-const StyContainer = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
+const StylContainer = styled(StyContainer)`
 	svg {
 		width: 30px;
 		height: 30px;
@@ -87,20 +84,6 @@ const StyContainer = styled.div`
 	}
 	.cta-btn {
 		transform-origin: center;
-	}
-	.wrapper {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		flex-direction: column;
-		h1 {
-			color: #4347ea;
-			margin: 1rem 0;
-		}
-		h3 {
-			font-size: 16px;
-			margin-bottom: 1rem;
-		}
 	}
 `;
 

@@ -6,13 +6,14 @@ const chalk = require("chalk");
 const devRouter = require("./routers/devRouter");
 
 const app = express();
-const PORT = process.env.PORT || 5000;
 
 //middlewares
 app.use(cors());
 app.use(express.json());
-app.use("/api",devRouter);
+app.use(express.urlencoded({ extended: false }));
+app.use("/api", devRouter);
 
+const PORT = process.env.PORT || 5000;
 
 app.get("/", (req, res) => {
 	res.send("Server is running");

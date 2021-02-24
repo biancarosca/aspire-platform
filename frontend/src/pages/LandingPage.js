@@ -1,7 +1,7 @@
 import React from "react";
 import hero from "../images/hero.jpg";
 import styled from "styled-components";
-import { StyWrapper, StyBtn } from "../components/GlobalStyles";
+import { StyWrapper, StyLinkBtn } from "../components/GlobalStyles";
 import LandingNav from "../components/LandingNav";
 import CTAbtn from "../components/CTAbtn";
 
@@ -21,7 +21,7 @@ const LandingPage = () => {
 					<div className="info">
 						<h1>Fastest link between developers and recruiters.</h1>
 						<div className="cta-btn">
-							<StyBtn to="/join">Get started</StyBtn>
+							<StyLinkBtn to="/join">Get started</StyLinkBtn>
 						</div>
 					</div>
 					<img src={hero} alt="interview"/>

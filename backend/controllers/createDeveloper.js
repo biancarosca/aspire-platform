@@ -1,7 +1,7 @@
 // const express = require("express");
 
 const createDeveloper = async (req, res) => {
-	res.send("into create dev");
+	res.send(req.body);
 };
 
 module.exports = createDeveloper;

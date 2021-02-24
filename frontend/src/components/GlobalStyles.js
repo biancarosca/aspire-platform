@@ -46,7 +46,20 @@ export const StyWrapper = styled.div`
 	}
 `;
 
-export const StyBtn = styled(Link)`
+export const StyBtn = styled.button`
+	text-decoration: none;
+	outline: none;
+	color: white;
+	font: inherit;
+	border:none;
+	background-color: #413feb;
+	margin-top: 1rem;
+	margin-bottom: 1.5rem;
+	padding: 0.5rem 3rem;
+	border-radius: 5rem;
+`;
+
+export const StyLinkBtn = styled(Link)`
 	text-decoration: none;
 	color: white;
 	background-color: #413feb;
@@ -57,7 +70,7 @@ export const StyBtn = styled(Link)`
 `;
 
 export const StyInput = styled.input`
-	margin: 1.5rem 0;
+	margin: 1rem 0;
 	outline: none;
 	border-top-style: hidden;
 	border-right-style: hidden;
@@ -69,6 +82,34 @@ export const StyInput = styled.input`
 	font-size: 16px;
 	&:focus {
 		border-color: #4347ea;
+	}
+`;
+
+export const StyContainer = styled.div`
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	form {
+		display: flex;
+		flex-direction: column;
+	}
+	.wrapper {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		h1 {
+			color: #4347ea;
+			margin: 1rem 0;
+		}
+		h3 {
+			font-size: 16px;
+			margin-bottom: 1rem;
+		}
+		input {
+			display: block;
+		}
 	}
 `;
 

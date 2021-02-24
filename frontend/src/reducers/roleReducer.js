@@ -1,4 +1,4 @@
-const pickedRole = (state = null, action) => {
+const pickedRole = (state = "developer", action) => {
 	switch (action.type) {
 	case "PICK_ROLE":
 		return action.payload;
