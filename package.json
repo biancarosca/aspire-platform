@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/biancarosca/aspire-platform#readme",
   "devDependencies": {
+    "chalk": "^4.1.0",
     "concurrently": "^6.0.0",
     "eslint": "^7.20.0",
     "eslint-config-standard": "^16.0.2",
@@ -35,10 +36,13 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.2",
     "@fortawesome/react-fontawesome": "^0.1.14",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "framer-motion": "^3.6.6",
+    "mongoose": "^5.11.18",
     "react-router-dom": "^5.2.0",
     "styled-components": "^5.2.1",
-    "typescript": "^4.1.5"
+    "typescript": "^4.1.5",
+    "validator": "^13.5.2"
   }
 }
