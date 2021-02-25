@@ -7,11 +7,8 @@ import {
 	StyInput,
 	StyContainer,
 } from "../components/GlobalStyles";
+import AvatarComp from "../components/AvatarComp";
 import styled from "styled-components";
-import { Avatar } from "antd";
-import "antd/dist/antd.css";
-import { UserOutlined } from "@ant-design/icons";
-// import portrait from "../images/portrait.png";
 
 const CreateProfilePage = () => {
 	const role = useSelector((store) => store.pickedRole);
@@ -22,11 +19,7 @@ const CreateProfilePage = () => {
 				<div className="wrapper">
 					<h1>{role.charAt(0).toUpperCase() + role.slice(1)}</h1>
 					<h3>Create your profile</h3>
-					<StyAvatar
-						size={128}
-						icon={<UserOutlined />}
-						onClick={() => console.log("click")}
-					/>
+					<AvatarComp />
 					<form>
 						<StyInput
 							type="text"
@@ -57,10 +50,6 @@ const CreateProfilePage = () => {
 		</StyWrapper>
 	);
 };
-
-const StyAvatar = styled(Avatar)`
-	cursor: pointer;
-`;
 
 const StylContainer = styled(StyContainer)`
 	.cta-btn {
