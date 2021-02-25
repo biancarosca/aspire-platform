@@ -48,6 +48,7 @@ export const StyWrapper = styled.div`
 
 export const StyBtn = styled.button`
 	text-decoration: none;
+	cursor: pointer;
 	outline: none;
 	color: white;
 	font: inherit;
