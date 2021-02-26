@@ -1,5 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
+//packages
+import styled from "styled-components";
+//components
 import LandingNav from "../components/LandingNav";
 import {
 	StyWrapper,
@@ -8,9 +11,9 @@ import {
 	StyContainer,
 } from "../components/GlobalStyles";
 import AvatarComp from "../components/AvatarComp";
-import styled from "styled-components";
+import LangContainers from "../components/LangContainers";
 
-const CreateProfilePage = () => {
+const CreateProfile = () => {
 	const role = useSelector((store) => store.pickedRole);
 	return (
 		<StyWrapper>
@@ -41,6 +44,7 @@ const CreateProfilePage = () => {
 							size="25"
 							// value={email}
 						/>
+						<LangContainers />
 						<StyBtn className="cta-btn" type="submit">
 							Continue
 						</StyBtn>
@@ -57,4 +61,4 @@ const StylContainer = styled(StyContainer)`
 	}
 `;
 
-export default CreateProfilePage;
+export default CreateProfile;
