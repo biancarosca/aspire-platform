@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { toast } from "react-toastify";
 import Avatar from "react-avatar-edit";
 //assets
-// import defaultPortrait from "../images/portrait.png";
+import defaultPortrait from "../images/portrait.png";
 
 const AvatarComp = () => {
 	const [preview, setPreview] = useState(null);
@@ -39,7 +39,6 @@ const AvatarComp = () => {
 		}
 	};
 
-
 	const handleEdit = () => {
 		setEdit((prev) => !prev);
 		if (edit) {
@@ -64,12 +63,22 @@ const AvatarComp = () => {
 					onCrop={onCrop}
 					onClose={onClose}
 					onBeforeFileLoad={onBeforeFileLoad}
+					labelStyle={{ color: "#434246", cursor: "pointer" }}
 					src={preview}
 				/>
 			</div>
 			<StyEdit>
-				{preview && <img src={preview.preview } alt="Preview" />}
-				<StyBtn className="cta-btn" onClick={handleEdit}>{edit ? "Done" : "Edit"}</StyBtn>
+				<img
+					src={
+						preview && preview.preview
+							? preview.preview
+							: defaultPortrait
+					}
+					alt="Preview"
+				/>
+				<StyBtn className="cta-btn" onClick={handleEdit}>
+					{edit ? "Done" : "Edit"}
+				</StyBtn>
 			</StyEdit>
 		</div>
 	);
@@ -82,6 +91,7 @@ const StyEdit = styled.div`
 	justify-content: center;
 	img {
 		margin-top: 1rem;
+		border-radius: 100%;
 	}
 `;
 
