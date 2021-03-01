@@ -5,10 +5,7 @@ import styled from "styled-components";
 //assets
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
-//components
-import {
-	StyWrapper,
-} from "../components/GlobalStyles";
+
 
 
 const LangContainers = ({ languages }) => {
@@ -40,9 +37,12 @@ const StyClose = styled(FontAwesomeIcon)`
 	cursor: pointer;
 	color: #8c8e91;
 	margin-right: 0.3rem;
+	&:hover{
+		color:#413feb;
+	}
 `;
 
-const StyLangWrap = styled(StyWrapper)`
+const StyLangWrap = styled.div`
 	display: flex;
 	flex-wrap: wrap;
 	.lang-wrap {

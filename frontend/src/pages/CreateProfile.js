@@ -1,7 +1,8 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 //packages
 import styled from "styled-components";
+import { toast } from "react-toastify";
 //components
 import LandingNav from "../components/LandingNav";
 import {
@@ -12,6 +13,8 @@ import {
 } from "../components/GlobalStyles";
 import AvatarComp from "../components/AvatarComp";
 import LangContainers from "../components/LangContainers";
+//utils
+import { languagesData } from "../utils/languagesData";
 
 const CreateProfile = () => {
 	const role = useSelector((store) => store.pickedRole);
@@ -20,8 +23,20 @@ const CreateProfile = () => {
 	const handleLanguagesInput = (target) => {
 		if (target.value.indexOf(",") !== -1) {
 			const lang = target.value;
-			const langSanitized = lang.charAt(0).toUpperCase() + lang.toLowerCase().slice(1,lang.length-1); //capitalize
-			setLanguages([...languages, langSanitized]);
+			const langSanitized = lang
+				.split(" ")
+				.map(
+					(piece) =>
+						piece.charAt(0).toUpperCase() +
+						piece.toLowerCase().slice(1, lang.length - 1) //capitalize
+				)
+				.join(""); 
+			if (languages.includes(langSanitized))
+				toast.error("Language already added!");
+			else if (languagesData.includes(langSanitized))
+				setLanguages([...languages, langSanitized]);
+			else
+				toast.error("Not a valid language!");	
 			target.value = "";
 		}
 	};
@@ -57,9 +72,7 @@ const CreateProfile = () => {
 							size="25"
 							// value={email}
 						/>
-						<LangContainers
-							languages={languages}
-						/>
+						<LangContainers languages={languages} />
 						<StyBtn className="cta-btn" type="submit">
 							Continue
 						</StyBtn>
@@ -71,6 +84,9 @@ const CreateProfile = () => {
 };
 
 const StylContainer = styled(StyContainer)`
+	form {
+		width: 300px;
+	}
 	.cta-btn {
 		transform-origin: center;
 	}
