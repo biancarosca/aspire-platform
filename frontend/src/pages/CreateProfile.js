@@ -13,6 +13,7 @@ import {
 } from "../components/GlobalStyles";
 import AvatarComp from "../components/AvatarComp";
 import LangContainers from "../components/LangContainers";
+import EducationComp from "../components/EducationComp";
 //utils
 import { languagesData } from "../utils/languagesData";
 
@@ -30,13 +31,12 @@ const CreateProfile = () => {
 						piece.charAt(0).toUpperCase() +
 						piece.toLowerCase().slice(1, lang.length - 1) //capitalize
 				)
-				.join(""); 
+				.join("");
 			if (languages.includes(langSanitized))
 				toast.error("Language already added!");
 			else if (languagesData.includes(langSanitized))
 				setLanguages([...languages, langSanitized]);
-			else
-				toast.error("Not a valid language!");	
+			else toast.error("Not a valid language!");
 			target.value = "";
 		}
 	};
@@ -72,7 +72,11 @@ const CreateProfile = () => {
 							size="25"
 							// value={email}
 						/>
-						<LangContainers languages={languages} />
+						<LangContainers
+							languages={languages}
+							setLanguages={setLanguages}
+						/>
+						<EducationComp />
 						<StyBtn className="cta-btn" type="submit">
 							Continue
 						</StyBtn>
@@ -84,6 +88,7 @@ const CreateProfile = () => {
 };
 
 const StylContainer = styled(StyContainer)`
+	margin-bottom: 5rem;
 	form {
 		width: 300px;
 	}

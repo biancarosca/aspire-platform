@@ -8,9 +8,10 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 
 
-const LangContainers = ({ languages }) => {
+const LangContainers = ({ languages, setLanguages }) => {
 	const handleDeleteLang = (lang) => {
-		console.log(lang);
+		const filteredLangs = languages.filter(stateLang => stateLang !== lang);
+		setLanguages(filteredLangs);
 	};
 
 	return (
@@ -31,6 +32,7 @@ const LangContainers = ({ languages }) => {
 
 LangContainers.propTypes = {
 	languages: PropTypes.array,
+	setLanguages: PropTypes.func
 };
 
 const StyClose = styled(FontAwesomeIcon)`
@@ -47,7 +49,7 @@ const StyLangWrap = styled.div`
 	flex-wrap: wrap;
 	.lang-wrap {
 		background-color: #d4d5d6;
-		margin-top: 1rem;
+		margin-top: 0.3rem;
 		margin-right: 0.5rem;
 		display: flex;
 		align-items: center;

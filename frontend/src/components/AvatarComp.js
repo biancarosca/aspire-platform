@@ -58,11 +58,12 @@ const AvatarComp = () => {
 		<div>
 			<div style={edit ? { display: "block" } : { display: "none" }}>
 				<Avatar
-					width={320}
-					height={225}
+					width={300}
+					height={205}
 					onCrop={onCrop}
 					onClose={onClose}
 					onBeforeFileLoad={onBeforeFileLoad}
+					label="Upload your avatar"
 					labelStyle={{ color: "#434246", cursor: "pointer" }}
 					src={preview}
 				/>
@@ -92,6 +93,8 @@ const StyEdit = styled.div`
 	img {
 		margin-top: 1rem;
 		border-radius: 100%;
+		height: 100px;
+		width: 100px;
 	}
 `;
 
