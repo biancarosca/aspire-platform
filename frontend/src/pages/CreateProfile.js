@@ -15,7 +15,7 @@ import AvatarComp from "../components/AvatarComp";
 import LangContainers from "../components/LangContainers";
 import InputExperienceComp from "../components/InputExperienceComp";
 import EducWorkComp from "../components/EducWorkComp";
-import PersonalProjsComp from "../components/PersonalProjsComp";
+import InputLinksComp from "../components/InputLinksComp";
 import TextareaComp from "../components/TextareaComp";
 
 //utils
@@ -52,6 +52,7 @@ const CreateProfile = () => {
 				<div className="wrapper">
 					<h1>{role.charAt(0).toUpperCase() + role.slice(1)}</h1>
 					<h3>Create your profile</h3>
+					<StyBtn className="cta-btn">Or complete later</StyBtn>
 					<AvatarComp />
 					<form>
 						<TextareaComp placeholder="Add your bio." />
@@ -94,7 +95,13 @@ const CreateProfile = () => {
 							/>
 						</InputExperienceComp>
 						<InputExperienceComp title="Personal projects">
-							<PersonalProjsComp />
+							<InputLinksComp placeholders={["Link to Github","Link to a live demo"]}>
+								<TextareaComp placeholder="Describe in a few words your project." />
+							</InputLinksComp>
+						</InputExperienceComp>
+						<InputExperienceComp title="Social links">
+							<InputLinksComp placeholders={["Add your link"]}>
+							</InputLinksComp>
 						</InputExperienceComp>
 						<StyBtn className="cta-btn" type="submit">
 							Continue

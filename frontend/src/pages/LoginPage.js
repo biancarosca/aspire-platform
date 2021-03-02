@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { StyWrapper, StyBtn, StyInput,StyContainer } from "../components/GlobalStyles";
+import {
+	StyWrapper,
+	StyBtn,
+	StyInput,
+	StyContainer,
+} from "../components/GlobalStyles";
 import LandingNav from "../components/LandingNav";
 import styled from "styled-components";
 import CTAbtn from "../components/CTAbtn";
@@ -26,9 +31,15 @@ const LoginPage = () => {
 					<h1>Welcome!</h1>
 					<h3>Log in to continue</h3>
 					<form>
-						<StyInput type="text" placeholder="Email" size="25" />
+						<StyInput
+							required
+							type="text"
+							placeholder="Email"
+							size="25"
+						/>
 						<div className="input-container">
 							<StyInput
+								required
 								type={eyeOpen ? "text" : "password"}
 								placeholder="Password"
 								size="25"
@@ -60,7 +71,6 @@ const LoginPage = () => {
 							Continue
 						</StyBtn>
 					</form>
-
 				</div>
 			</StylContainer>
 		</StyWrapper>

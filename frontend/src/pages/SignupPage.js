@@ -59,25 +59,25 @@ const SignupPage = () => {
 						<RoleChoice roleName="recruiter" />
 					</div>
 					<form onSubmit={handleSubmit}>
-						<StyInput onChange={({target}) => setFirstName(target.value)}
+						<StyInput required onChange={({target}) => setFirstName(target.value)}
 							type="text"
 							placeholder="First name"
 							size="25"
 							value={firstName}
 						/>
-						<StyInput onChange={({target}) => setLastName(target.value)}
+						<StyInput required onChange={({target}) => setLastName(target.value)}
 							type="text"
 							placeholder="Last name"
 							size="25"
 							value={lastName}
 						/>
-						<StyInput onChange={({target}) => setEmail(target.value)}
+						<StyInput required onChange={({target}) => setEmail(target.value)}
 							type="text" 
 							placeholder="Email" 
 							size="25"
 							value={email} 
 						/>
-						<StyInput onChange={({target}) => setPassword(target.value)}
+						<StyInput required onChange={({target}) => setPassword(target.value)}
 							type="password"
 							placeholder="Password"
 							size="25"
@@ -85,7 +85,7 @@ const SignupPage = () => {
 							autoComplete="on"
 							value={password}
 						/>
-						<StyInput onChange={({target}) => setConfirmPsw(target.value)}
+						<StyInput required onChange={({target}) => setConfirmPsw(target.value)}
 							type="password"
 							placeholder="Confirm password"
 							size="25"
