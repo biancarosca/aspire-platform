@@ -11,6 +11,7 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import CreateProfile from "./pages/CreateProfile";
 
+
 function App() {
 	return (
 		<div className="App">

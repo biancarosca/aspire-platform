@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 //packages
 import styled from "styled-components";
 import { toast } from "react-toastify";
-import uuid from "react-uuid";
 //components
 import LandingNav from "../components/LandingNav";
 import {
@@ -14,14 +13,13 @@ import {
 } from "../components/GlobalStyles";
 import AvatarComp from "../components/AvatarComp";
 import LangContainers from "../components/LangContainers";
-import EducationComp from "../components/EducationComp";
+import InputExperienceComp from "../components/InputExperienceComp";
 //utils
 import { languagesData } from "../utils/languagesData";
 
 const CreateProfile = () => {
 	const role = useSelector((store) => store.pickedRole);
 	const [languages, setLanguages] = useState([]);
-	const [numEducField, setNumEducField] = useState([]); //keep track of education input groups
 
 	const handleLanguagesInput = (target) => {
 		if (target.value.indexOf(",") !== -1) {
@@ -41,11 +39,6 @@ const CreateProfile = () => {
 			else toast.error("Not a valid language!");
 			target.value = "";
 		}
-	};
-
-	const handleAddEduc = (e) => {
-		e.preventDefault();
-		setNumEducField((prev) => [...prev, uuid()]); //assign to each education input group a unique id
 	};
 
 	return (
@@ -83,24 +76,8 @@ const CreateProfile = () => {
 							languages={languages}
 							setLanguages={setLanguages}
 						/>
-						<div className="education-wrapper">
-							<div className="education-header">
-								<span className="education-title">
-									Education
-								</span>
-								<StyAddEduc onClick={(e) => handleAddEduc(e)}>
-									+
-								</StyAddEduc>
-							</div>
-							{numEducField &&
-								numEducField.map((id) => (
-									<EducationComp
-										key={id}
-										id={id}
-										setNumEducField={setNumEducField}
-									/>
-								))}
-						</div>
+						<InputExperienceComp title="Education" placeholder1="Institution" placeholder2="Degree/title"/>
+						<InputExperienceComp title="Work experience" placeholder1="Company" placeholder2="Job title" />
 						<StyBtn className="cta-btn" type="submit">
 							Continue
 						</StyBtn>
@@ -111,12 +88,6 @@ const CreateProfile = () => {
 	);
 };
 
-const StyAddEduc = styled(StyBtn)`
-	width: 30px;
-	height: 30px;
-	padding: 0;
-	margin: 0;
-`;
 
 const StylContainer = styled(StyContainer)`
 	margin-bottom: 5rem;
@@ -125,19 +96,6 @@ const StylContainer = styled(StyContainer)`
 	}
 	.cta-btn {
 		transform-origin: center;
-	}
-	.education-wrapper {
-		display: flex;
-		flex-direction: column;
-		margin-top: 1.5rem;
-	}
-	.education-header {
-		display: flex;
-		width: 100%;
-		align-items: center;
-	}
-	.education-title {
-		padding: 0 0.5rem;
 	}
 `;
 

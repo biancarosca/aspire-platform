@@ -4,9 +4,10 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import { motion } from "framer-motion";
 //components
-import { StyInput, StyBtn } from "../components/GlobalStyles";
+import { StyInput, StyBtn } from "./GlobalStyles";
+import Tooltip from "@material-ui/core/Tooltip";
 
-const EducationComp = ({ id, setNumEducField }) => {
+const EducWorkComp = ({ id, setNumFields, placeholder1, placeholder2 }) => {
 	const mountingAnim = {
 		initial: { opacity: 0 },
 		final: { opacity: 1 },
@@ -28,26 +29,32 @@ const EducationComp = ({ id, setNumEducField }) => {
 		setAnim(unmountAnim);
 		setTimeout(
 			() =>
-				setNumEducField((prev) =>
-					prev.filter((currId) => currId !== id)
-				),
+				setNumFields((prev) => prev.filter((currId) => currId !== id)),
 			400
 		);
 	};
 	return (
 		<StyWrapper variants={anim} initial="initial" animate="final">
-			<StyRemove onClick={(e) => handleRemove(e)}>-</StyRemove>
-			<StyInput type="text" placeholder="Institution" size="25" />
-			<StyInput type="text" placeholder="Degree/title" size="25" />
-			<StyInput type="date" />
-			<StyInput type="date" />
+			<Tooltip title="Delete">
+				<StyRemove id="deleteBtn" onClick={(e) => handleRemove(e)}>
+					-
+				</StyRemove>
+			</Tooltip>
+			<StyInput type="text" placeholder={placeholder1} size="25" />
+			<StyInput type="text" placeholder={placeholder2} size="25" />
+			<label htmlFor="start">Start date</label>
+			<StyInput type="date" id="start" />
+			<label htmlFor="end">End date</label>
+			<StyInput type="date" id="end" />
 		</StyWrapper>
 	);
 };
 
-EducationComp.propTypes = {
+EducWorkComp.propTypes = {
 	id: PropTypes.string,
-	setNumEducField: PropTypes.func,
+	setNumFields: PropTypes.func,
+	placeholder1: PropTypes.string,
+	placeholder2: PropTypes.string,
 };
 
 const StyRemove = styled(StyBtn)`
@@ -73,7 +80,14 @@ const StyWrapper = styled(motion.div)`
 	input[type="date"] {
 		color: #434246;
 		width: 60%;
+		margin-top: 0;
+	}
+	label {
+		margin-top: 1rem;
+		padding: 0 0.5rem;
+		font-weight: bold;
+		width: fit-content;
 	}
 `;
 
-export default EducationComp;
+export default EducWorkComp;
