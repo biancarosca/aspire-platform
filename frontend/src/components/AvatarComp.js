@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 //components
 import { StyBtn } from "../components/GlobalStyles";
 //packages
@@ -11,6 +12,7 @@ import defaultPortrait from "../images/portrait.png";
 const AvatarComp = () => {
 	const [preview, setPreview] = useState(null);
 	const [edit, setEdit] = useState(true);
+	const role = useSelector((store) => store.pickedRole);
 
 	const onClose = () => {
 		setPreview(null);
@@ -41,8 +43,9 @@ const AvatarComp = () => {
 
 	const handleEdit = () => {
 		setEdit((prev) => !prev);
+		const message = role === "developer" ? "Avatar" : "Logo";
 		if (edit) {
-			toast.success("Avatar successfully updated!", {
+			toast.success(`${message} successfully updated!`, {
 				position: "top-center",
 				autoClose: 5000,
 				hideProgressBar: false,
@@ -63,7 +66,7 @@ const AvatarComp = () => {
 					onCrop={onCrop}
 					onClose={onClose}
 					onBeforeFileLoad={onBeforeFileLoad}
-					label="Upload your avatar"
+					label={role ==="developer" ? "Upload your avatar" : "Upload the company's logo"}
 					labelStyle={{ color: "#434246", cursor: "pointer" }}
 					src={preview}
 				/>

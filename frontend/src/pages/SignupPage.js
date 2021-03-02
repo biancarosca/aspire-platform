@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 //components
 import { StyWrapper, StyBtn, StyInput,StyContainer } from "../components/GlobalStyles";
@@ -8,7 +8,7 @@ import styled from "styled-components";
 import CTAbtn from "../components/CTAbtn";
 import RoleChoice from "../components/RoleChoice";
 //axios
-import axios from "axios";
+// import axios from "axios";
 //packages
 import { toast } from "react-toastify";
 
@@ -18,7 +18,7 @@ const SignupPage = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPsw, setConfirmPsw] = useState("");
-	const role = useSelector(store => store.pickedRole);
+	// const role = useSelector(store => store.pickedRole);
 	const history = useHistory();
 
 	const handleSubmit = async (e) => {
@@ -28,12 +28,12 @@ const SignupPage = () => {
 			return;
 		}
 		try {
-			await axios.post(`http://localhost:5000/api/${role}s`, {
-				firstName,
-				lastName,
-				email,
-				password,
-			});
+			// await axios.post(`http://localhost:5000/api/${role}s`, {
+			// 	firstName,
+			// 	lastName,
+			// 	email,
+			// 	password,
+			// });
 			// console.log(res);
 			history.push("/profile");
 		} catch (error) {
