@@ -21,7 +21,7 @@ import { languagesData } from "../utils/languagesData";
 const CreateProfile = () => {
 	const role = useSelector((store) => store.pickedRole);
 	const [languages, setLanguages] = useState([]);
-	const [numEducField, setNumEducField] = useState([]);		//keep track of education input groups 
+	const [numEducField, setNumEducField] = useState([]); //keep track of education input groups
 
 	const handleLanguagesInput = (target) => {
 		if (target.value.indexOf(",") !== -1) {
@@ -45,7 +45,7 @@ const CreateProfile = () => {
 
 	const handleAddEduc = (e) => {
 		e.preventDefault();
-		setNumEducField((prev) => [...prev, uuid()]);		//assign to each education input group a unique id
+		setNumEducField((prev) => [...prev, uuid()]); //assign to each education input group a unique id
 	};
 
 	return (
