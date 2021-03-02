@@ -15,6 +15,9 @@ import AvatarComp from "../components/AvatarComp";
 import LangContainers from "../components/LangContainers";
 import InputExperienceComp from "../components/InputExperienceComp";
 import EducWorkComp from "../components/EducWorkComp";
+import PersonalProjsComp from "../components/PersonalProjsComp";
+import TextareaComp from "../components/TextareaComp";
+
 //utils
 import { languagesData } from "../utils/languagesData";
 
@@ -51,6 +54,7 @@ const CreateProfile = () => {
 					<h3>Create your profile</h3>
 					<AvatarComp />
 					<form>
+						<TextareaComp placeholder="Add your bio." />
 						<StyInput
 							type="text"
 							placeholder="City"
@@ -90,6 +94,7 @@ const CreateProfile = () => {
 							/>
 						</InputExperienceComp>
 						<InputExperienceComp title="Personal projects">
+							<PersonalProjsComp />
 						</InputExperienceComp>
 						<StyBtn className="cta-btn" type="submit">
 							Continue
