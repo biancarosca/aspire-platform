@@ -4,11 +4,11 @@ import styled from "styled-components";
 import uuid from "react-uuid";
 import PropTypes from "prop-types";
 //components
-import EducWorkComp from "../components/EducWorkComp";
-import { StyBtn } from "../components/GlobalStyles";
+import AddFieldsOnClick from "./AddFieldsOnClick";
+import { StyBtn} from "../components/GlobalStyles";
 import Tooltip from "@material-ui/core/Tooltip";
 
-const InputExperienceComp = ({ title, placeholder1, placeholder2 }) => {
+const InputExperienceComp = ({ title, children }) => {
 	const [numFields, setNumFields] = useState([]); //keep track of input groups
 
 	const handleAdd = (e) => {
@@ -25,13 +25,13 @@ const InputExperienceComp = ({ title, placeholder1, placeholder2 }) => {
 			</div>
 			{numFields &&
 				numFields.map((id) => (
-					<EducWorkComp
+					<AddFieldsOnClick
 						key={id}
 						id={id}
 						setNumFields={setNumFields}
-						placeholder1={placeholder1}
-						placeholder2={placeholder2}
-					/>
+					>
+						{React.Children.toArray(children)}
+					</AddFieldsOnClick>
 				))}
 		</StyExpWrap>
 	);
@@ -39,8 +39,7 @@ const InputExperienceComp = ({ title, placeholder1, placeholder2 }) => {
 
 InputExperienceComp.propTypes = {
 	title: PropTypes.string,
-	placeholder1: PropTypes.string,
-	placeholder2: PropTypes.string,
+	children: PropTypes.node,
 };
 
 const StyAdd = styled(StyBtn)`

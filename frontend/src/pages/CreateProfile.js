@@ -14,6 +14,7 @@ import {
 import AvatarComp from "../components/AvatarComp";
 import LangContainers from "../components/LangContainers";
 import InputExperienceComp from "../components/InputExperienceComp";
+import EducWorkComp from "../components/EducWorkComp";
 //utils
 import { languagesData } from "../utils/languagesData";
 
@@ -76,8 +77,20 @@ const CreateProfile = () => {
 							languages={languages}
 							setLanguages={setLanguages}
 						/>
-						<InputExperienceComp title="Education" placeholder1="Institution" placeholder2="Degree/title"/>
-						<InputExperienceComp title="Work experience" placeholder1="Company" placeholder2="Job title" />
+						<InputExperienceComp title="Education">
+							<EducWorkComp
+								placeholder1="Institution"
+								placeholder2="Degree/title"
+							/>
+						</InputExperienceComp>
+						<InputExperienceComp title="Work experience">
+							<EducWorkComp
+								placeholder1="Company"
+								placeholder2="Job title"
+							/>
+						</InputExperienceComp>
+						<InputExperienceComp title="Personal projects">
+						</InputExperienceComp>
 						<StyBtn className="cta-btn" type="submit">
 							Continue
 						</StyBtn>
@@ -87,7 +100,6 @@ const CreateProfile = () => {
 		</StyWrapper>
 	);
 };
-
 
 const StylContainer = styled(StyContainer)`
 	margin-bottom: 5rem;
