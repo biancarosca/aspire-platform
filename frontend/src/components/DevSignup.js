@@ -1,56 +1,72 @@
 import React, { useState } from "react";
 //packages
-import styled from "styled-components";
+// import styled from "styled-components";
 //components
 import { toast } from "react-toastify";
 import LangContainers from "../components/LangContainers";
 import InputExperienceComp from "../components/InputExperienceComp";
-// import EducWorkComp from "../components/EducWorkComp";
+import EducWorkComp from "../components/EducWorkComp";
 import InputLinksComp from "../components/InputLinksComp";
 import TextareaComp from "../components/TextareaComp";
 import { StyBtn, StyInput } from "../components/GlobalStyles";
 //utils
 import { languagesData } from "../utils/languagesData";
-//redux
-import { useDispatch, useSelector } from "react-redux";
-import allActions from "../actions/index";
+// //redux
+// import { useDispatch, useSelector } from "react-redux";
+// import allActions from "../actions/index";
 
 const DevSignup = () => {
-	const dispatch = useDispatch();
+	// const dispatch = useDispatch();
 	const [languages, setLanguages] = useState([]);
 	const [city, setCity] = useState("");
 	const [country, setCountry] = useState("");
-	const [institution, setInstitution] = useState("");
-	const [degree, setDegree] = useState("");
-	const [start, setStart] = useState("");
-	const [end, setEnd] = useState("");
-	const education = useSelector((store) => store.education);
+	// const [institution, setInstitution] = useState("");
+	// const [degree, setDegree] = useState("");
+	// const [start, setStart] = useState("");
+	// const [end, setEnd] = useState("");
+	// const education = useSelector((store) => store.education);
 	// const activeSection = useSelector((store) => store.activeSection);
 	// const [work, setWork] = useState([]);
 
-	const handleInput = (target) => {
-		// "Done" button was clicked, values can be sent to store
-		const educIdx = education.findIndex(
-			(group) => group.id === target.parentNode.id
-		); //find the index of the current input group in state
-		if (educIdx !== -1) {
-			education.splice(educIdx, 1); //delete it from state if it exists
-		}
-		//add the updated version
-		dispatch(
-			allActions.addEducation({
-				institution,
-				degree,
-				period: [start, end],
-				id: target.parentNode.id,
-			})
-		);
-		//reset state
-		setInstitution("");
-		setDegree("");
-		setStart("");
-		setEnd("");
-	};
+	// const handleSave = (e,message) => {
+	// 	e.preventDefault();
+	// 	dispatch(allActions.toggleSection(false));
+	// 	handleInput(e.target);
+
+	// 	toast.success(`${message} was successfully saved!`, {
+	// 		position: "top-center",
+	// 		autoClose: 5000,
+	// 		hideProgressBar: false,
+	// 		closeOnClick: true,
+	// 		pauseOnHover: true,
+	// 		draggable: true,
+	// 		progress: undefined,
+	// 	});
+	// };
+
+	// const handleInput = (target) => {
+	// 	// "Done" button was clicked, values can be sent to store
+	// 	const educIdx = education.findIndex(
+	// 		(group) => group.id === target.parentNode.id
+	// 	); //find the index of the current input group in state
+	// 	if (educIdx !== -1) {
+	// 		education.splice(educIdx, 1); //delete it from state if it exists
+	// 	}
+	// 	//add the updated version
+	// 	dispatch(
+	// 		allActions.addEducation({
+	// 			institution,
+	// 			degree,
+	// 			period: [start, end],
+	// 			id: target.parentNode.id,
+	// 		})
+	// 	);
+	// 	//reset state
+	// 	setInstitution("");
+	// 	setDegree("");
+	// 	setStart("");
+	// 	setEnd("");
+	// };
 
 	const handleLanguagesInput = (target) => {
 		if (target.value.indexOf(",") !== -1) {
@@ -96,7 +112,12 @@ const DevSignup = () => {
 			/>
 			<LangContainers languages={languages} setLanguages={setLanguages} />
 			<InputExperienceComp title="Education">
-				<StyWrap>
+				<EducWorkComp
+					placeholder1="Institution"
+					placeholder2="Degree/title"
+					type="education"
+				></EducWorkComp>
+				{/* <StyWrap>
 					<StyInput
 						type="text"
 						placeholder="Institution"
@@ -125,23 +146,22 @@ const DevSignup = () => {
 					<StyInput
 						type="date"
 						id="end"
-						onChange={({ target }) => {
+						onChange={({target}) => {
 							setEnd(target.value);
 						}}
 					/>
-					<StyControl
-						onClick={(e) => {
-							e.preventDefault();
-							// dispatch(allActions.toggleSection(false));
-							handleInput(e.target);
-						}}
-					>
+					<StyControl onClick={(e) => handleSave(e,"Education")}>
 						Save
 					</StyControl>
-				</StyWrap>
+				</StyWrap> */}
 			</InputExperienceComp>
 			<InputExperienceComp title="Work experience">
-				<StyWrap>
+				<EducWorkComp
+					placeholder1="Company"
+					placeholder2="Job title"
+					type="work"
+				/>
+				{/* <StyWrap>
 					<StyInput
 						type="text"
 						placeholder="Company"
@@ -166,7 +186,7 @@ const DevSignup = () => {
 						id="end"
 						// onChange={({ target }) => handleInput(target, field)}
 					/>
-				</StyWrap>
+				</StyWrap> */}
 			</InputExperienceComp>
 			<InputExperienceComp title="Personal projects">
 				<InputLinksComp
@@ -190,28 +210,28 @@ const DevSignup = () => {
 	);
 };
 
-const StyWrap = styled.div`
-	input {
-		width: 100%;
-	}
-	input[type="date"] {
-		color: #434246;
-		width: 60%;
-		margin-top: 0;
-	}
-	label {
-		margin-top: 1rem;
-		padding: 0 0.5rem;
-		font-weight: bold;
-		width: fit-content;
-	}
-`;
+// const StyWrap = styled.div`
+// 	input {
+// 		width: 100%;
+// 	}
+// 	input[type="date"] {
+// 		color: #434246;
+// 		width: 60%;
+// 		margin-top: 0;
+// 	}
+// 	label {
+// 		margin-top: 1rem;
+// 		padding: 0 0.5rem;
+// 		font-weight: bold;
+// 		width: fit-content;
+// 	}
+// `;
 
-const StyControl = styled(StyBtn)`
-	width: fit-content;
-	padding: 0.5rem 1rem;
-	margin: 0;
-	align-self: flex-end;
-`;
+// const StyControl = styled(StyBtn)`
+// 	width: fit-content;
+// 	padding: 0.5rem 1rem;
+// 	margin: 0;
+// 	align-self: flex-end;
+// `;
 
 export default DevSignup;

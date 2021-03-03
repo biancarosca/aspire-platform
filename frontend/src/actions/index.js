@@ -1,6 +1,6 @@
 import pickRole from "./roleAction";
-import {addEducation,toggleSection} from "./signupAction";
+import {addEducation, addWork} from "./signupAction";
 
-const allActions = { pickRole,addEducation,toggleSection };
+const allActions = { pickRole,addEducation,addWork };
 
 export default allActions;

@@ -3,9 +3,10 @@ export const addEducation = (educObj) => {
 	return action;
 };
 
-export const toggleSection = (value) => {
-	const action = { type: "TOGGLE_STATE", payload: value };
+export const addWork = (workObj) => {
+	const action = { type: "ADD_WORK", payload: workObj };
 	return action;
 };
+
 
 

@@ -23,7 +23,7 @@ const InputExperienceComp = ({ title, children }) => {
 		<StyExpWrap>
 			<div className="header">
 				<span className="title">{title}</span>
-				<Tooltip title="Add education">
+				<Tooltip title="Add">
 					<StyAdd onClick={(e) => handleAdd(e)}>+</StyAdd>
 				</Tooltip>
 			</div>

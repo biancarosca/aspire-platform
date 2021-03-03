@@ -41,10 +41,9 @@ const AddFieldsOnClick = ({ id, setNumFields, children }) => {
 					-
 				</StyControl>
 			</Tooltip>
-			{/* {React.Children.toArray(children)} */}
 			{React.Children.map(children, (child) =>
 				React.cloneElement(child, {
-					id: id
+					id,
 				})
 			)}
 		</StyWrapper>

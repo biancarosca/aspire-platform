@@ -7,10 +7,10 @@ export const education = (state = [], action) => {
 	}
 };
 
-export const activeSection = (state = false, action) => {
+export const work = (state = [], action) => {
 	switch (action.type) {
-	case "TOGGLE_STATE":
-		return action.payload;
+	case "ADD_WORK":
+		return [...state, action.payload];
 	default:
 		return state;
 	}
