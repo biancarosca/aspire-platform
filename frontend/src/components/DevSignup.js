@@ -34,7 +34,7 @@ const DevSignup = () => {
 	};
 	return (
 		<form>
-			<TextareaComp placeholder="Add your bio." />
+			<TextareaComp placeholder="Add your bio." maxLength={120} />
 			<StyInput
 				type="text"
 				placeholder="City"
@@ -69,7 +69,7 @@ const DevSignup = () => {
 				<InputLinksComp
 					placeholders={["Link to Github", "Link to a live demo"]}
 				>
-					<TextareaComp placeholder="Describe in a few words your project." />
+					<TextareaComp placeholder="Describe in a few words your project." maxLength = {120} />
 				</InputLinksComp>
 			</InputExperienceComp>
 			<InputExperienceComp title="Social links">

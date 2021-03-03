@@ -9,7 +9,10 @@ import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import rootReducer from "./reducers/index";
 //material-ui
-import { unstable_createMuiStrictModeTheme, ThemeProvider } from "@material-ui/core/styles"; //fixes error originating from material-ui
+import {
+	unstable_createMuiStrictModeTheme,
+	ThemeProvider,
+} from "@material-ui/core/styles"; //fixes error originating from material-ui
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -18,12 +21,16 @@ const store = createStore(
 	composeEnhancers(applyMiddleware(thunk))
 );
 
-const theme = unstable_createMuiStrictModeTheme();
+const theme = unstable_createMuiStrictModeTheme({
+	palette: {
+		primary: { main: "#413feb" },
+	},
+});
 
 ReactDOM.render(
 	<Provider store={store}>
 		<React.StrictMode>
-			<ThemeProvider theme={theme}>		
+			<ThemeProvider theme={theme}>
 				<BrowserRouter>
 					<App />
 				</BrowserRouter>

@@ -3,19 +3,20 @@ import PropTypes from "prop-types";
 //packages
 import styled from "styled-components";
 
-const TextareaComp = ({ placeholder }) => {
+const TextareaComp = ({ placeholder,maxLength = 120 }) => {
 	return (
 		<StyTextarea
 			rows="4"
 			cols="30"
 			placeholder={placeholder}
-			maxLength={120}
+			maxLength={maxLength}
 		></StyTextarea>
 	);
 };
 
 TextareaComp.propTypes = {
 	placeholder: PropTypes.string,
+	maxLength: PropTypes.number,
 };
 
 const StyTextarea = styled.textarea`
