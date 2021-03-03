@@ -12,6 +12,7 @@ const AddFieldsOnClick = ({ id, setNumFields, children }) => {
 		initial: { opacity: 0 },
 		final: { opacity: 1 },
 	};
+
 	const unmountAnim = {
 		initial: { opacity: 1, height: "auto" },
 		final: {
@@ -36,11 +37,16 @@ const AddFieldsOnClick = ({ id, setNumFields, children }) => {
 	return (
 		<StyWrapper variants={anim} initial="initial" animate="final">
 			<Tooltip title="Delete">
-				<StyRemove id="deleteBtn" onClick={(e) => handleRemove(e)}>
+				<StyControl id="deleteBtn" onClick={(e) => handleRemove(e)}>
 					-
-				</StyRemove>
+				</StyControl>
 			</Tooltip>
-			{React.Children.toArray(children)}
+			{/* {React.Children.toArray(children)} */}
+			{React.Children.map(children, (child) =>
+				React.cloneElement(child, {
+					id: id
+				})
+			)}
 		</StyWrapper>
 	);
 };
@@ -48,10 +54,10 @@ const AddFieldsOnClick = ({ id, setNumFields, children }) => {
 AddFieldsOnClick.propTypes = {
 	id: PropTypes.string,
 	setNumFields: PropTypes.func,
-	children: PropTypes.node
+	children: PropTypes.node,
 };
 
-const StyRemove = styled(StyBtn)`
+const StyControl = styled(StyBtn)`
 	width: 30px;
 	height: 30px;
 	padding: 0;

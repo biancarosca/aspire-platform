@@ -6,14 +6,42 @@ import styled from "styled-components";
 import { StyInput } from "../components/GlobalStyles";
 
 const EducWorkComp = ({ placeholder1, placeholder2 }) => {
+	// useEffect(() => {
+	// 	let stateObj;
+	// 	if (type === "education")
+	// 		stateObj = { institution: "", degree: "", period: [] };
+	// 	else stateObj = { company: "", jobTitle: "", period: [] };
+	// }, []);
+
+	// const handleInput = (target, field) => {
+	// 	stateObj[field] = target.value;
+	// };
 	return (
 		<StyWrap>
-			<StyInput type="text" placeholder={placeholder1} size="25" />
-			<StyInput type="text" placeholder={placeholder2} size="25" />
+			<StyInput
+				type="text"
+				placeholder={placeholder1}
+				// onChange={({ target }) => handleInput(target, field)}
+				size="25"
+			/>
+			<StyInput
+				type="text"
+				placeholder={placeholder2}
+				// onChange={({ target }) => handleInput(target, field)}
+				size="25"
+			/>
 			<label htmlFor="start">Start date</label>
-			<StyInput type="date" id="start" />
+			<StyInput
+				type="date"
+				id="start"
+				// onChange={({ target }) => handleInput(target, field)}
+			/>
 			<label htmlFor="end">End date</label>
-			<StyInput type="date" id="end" />
+			<StyInput
+				type="date"
+				id="end"
+				// onChange={({ target }) => handleInput(target, field)}
+			/>
 		</StyWrap>
 	);
 };
@@ -21,6 +49,8 @@ const EducWorkComp = ({ placeholder1, placeholder2 }) => {
 EducWorkComp.propTypes = {
 	placeholder1: PropTypes.string,
 	placeholder2: PropTypes.string,
+	setState: PropTypes.func,
+	id: PropTypes.number,
 };
 
 const StyWrap = styled.div`

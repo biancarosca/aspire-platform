@@ -31,23 +31,38 @@ const devSchema = new mongoose.Schema(
 					required: true,
 					trim: true,
 				},
-				homeLocation: {
-					type: String,
-					required: true,
-				},
 				spokenLangs: {
-					type: Array,
-					required: true,
+					type: [String],
+					validate(value) {
+						value.forEach((element) => {
+							if (typeof element !== String)
+								throw new Error("Not an array of strings.");
+						});
+						// if (!value.length > 0)
+						// 	throw new Error("Languages are required.");
+					},
+				},
+				homeLocation: {
+					type: new mongoose.Schema({
+						city: {
+							type: String,
+							trim: true,
+						},
+						country: {
+							type: String,
+							trim: true,
+						},
+					}),
 				},
 				education: {
 					type: [
 						new mongoose.Schema({
-							entity: {
+							institution: {
 								type: String,
 								required: true,
 								trim: true,
 							},
-							qualification: {
+							degree: {
 								type: String,
 								required: true,
 								trim: true,
@@ -63,26 +78,18 @@ const devSchema = new mongoose.Schema(
 				workExp: {
 					type: [
 						new mongoose.Schema({
-							entity: {
+							company: {
 								type: String,
 								required: true,
 								trim: true,
 							},
-							jobRole: {
+							jobTitle: {
 								type: String,
 								required: true,
 								trim: true,
-							},
-							technologies: {
-								type: Array,
-								required: true,
 							},
 							period: {
 								type: Array,
-								trim: true,
-							},
-							responsabilities: {
-								type: String,
 								trim: true,
 							},
 						}),
@@ -95,22 +102,48 @@ const devSchema = new mongoose.Schema(
 				socialLinks: {
 					type: Array,
 					validate(value) {
-						if (!validator.isURL(value))
-							throw new Error("Not a valid URL!");
+						value.forEach((link, idx) => {
+							if (!validator.isURL(link))
+								throw new Error(
+									`URL number ${idx} is not a valid URL!`
+								);
+						});
 					},
 				},
 				portfolio: {
-					type: String,
-					trim: true,
-					validate(value) {
-						if (!validator.isURL(value))
-							throw new Error("Not a valid URL!");
-					},
+					type: [
+						new mongoose.Schema({
+							github: {
+								type: String,
+								required: true,
+								trim: true,
+								validate(value) {
+									if (!validator.isURL(value))
+										throw new Error("Not a valid URL!");
+								},
+							},
+							demo: {
+								type: String,
+								required: true,
+								trim: true,
+								validate(value) {
+									if (!validator.isURL(value))
+										throw new Error("Not a valid URL!");
+								},
+							},
+							description: {
+								type: String,
+								required: true,
+								trim: true,
+							},
+						}),
+					],
 				},
 				avatar: {
 					type: Buffer,
 				},
 			}),
+			required: [true, "Profile details are required."],
 		},
 	},
 	{ timestamps: true }
