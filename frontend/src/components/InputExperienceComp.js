@@ -7,16 +7,13 @@ import PropTypes from "prop-types";
 import AddFieldsOnClick from "./AddFieldsOnClick";
 import { StyBtn } from "../components/GlobalStyles";
 import Tooltip from "@material-ui/core/Tooltip";
-//redux
-import { useDispatch } from "react-redux";
-import allActions from "../actions/index";
+
+
 
 const InputExperienceComp = ({ title, children }) => {
-	const dispatch = useDispatch();
 	const [numFields, setNumFields] = useState([]); //keep track of input groups
 	const handleAdd = (e) => {
 		e.preventDefault();
-		dispatch(allActions.toggleSection(true));	//a new section was added and being completed
 		setNumFields((prev) => [...prev, uuid()]); //assign to each input group a unique id
 	};
 	return (

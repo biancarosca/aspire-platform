@@ -15,14 +15,17 @@ const EducWorkComp = ({ id, placeholder1, placeholder2, type }) => {
 	const [secondInp, setSecondInp] = useState("");
 	const [start, setStart] = useState("");
 	const [end, setEnd] = useState("");
+	const [saved, setSaved] = useState(false);
 	const education = useSelector((store) => store.education);
 	const work = useSelector((store) => store.work);
 
-	const handleSave = (e, message) => {
-		e.preventDefault();
-		dispatch(allActions.toggleSection(false));
-		handleInput();
+	const handleEdit = () => {
+		setSaved(false);
+	};
 
+	const handleSave = (message) => {
+		handleInput();
+		setSaved(true);
 		toast.success(`${message} was successfully saved!`, {
 			position: "top-center",
 			autoClose: 5000,
@@ -76,6 +79,12 @@ const EducWorkComp = ({ id, placeholder1, placeholder2, type }) => {
 					setFirstInp(target.value);
 				}}
 				size="25"
+				disabled={saved ? true : false}
+				style={
+					saved
+						? { backgroundColor: "white", borderBottom: "none" }
+						: {}
+				}
 			/>
 			<StyInput
 				type="text"
@@ -84,6 +93,12 @@ const EducWorkComp = ({ id, placeholder1, placeholder2, type }) => {
 					setSecondInp(target.value);
 				}}
 				size="25"
+				disabled={saved ? true : false}
+				style={
+					saved
+						? { backgroundColor: "white", borderBottom: "none" }
+						: {}
+				}
 			/>
 			<label htmlFor="start">Start date</label>
 			<StyInput
@@ -92,6 +107,12 @@ const EducWorkComp = ({ id, placeholder1, placeholder2, type }) => {
 				onChange={({ target }) => {
 					setStart(target.value);
 				}}
+				disabled={saved ? true : false}
+				style={
+					saved
+						? { backgroundColor: "white", borderBottom: "none" }
+						: {}
+				}
 			/>
 			<label htmlFor="end">End date</label>
 			<StyInput
@@ -100,15 +121,24 @@ const EducWorkComp = ({ id, placeholder1, placeholder2, type }) => {
 				onChange={({ target }) => {
 					setEnd(target.value);
 				}}
+				disabled={saved ? true : false}
+				style={
+					saved
+						? { backgroundColor: "white", borderBottom: "none" }
+						: {}
+				}
 			/>
 			<StyControl
 				onClick={(e) => {
-					type === "education"
-						? handleSave(e, "Education")
-						: handleSave(e, "Work experience");
+					e.preventDefault();
+					saved
+						? handleEdit()
+						: type === "education"
+							? handleSave("Education")
+							: handleSave("Work experience");
 				}}
 			>
-				Save
+				{saved ? "Edit" : "Save"}
 			</StyControl>
 		</StyWrap>
 	);
