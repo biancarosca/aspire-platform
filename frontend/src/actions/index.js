@@ -6,6 +6,9 @@ import {
 	addLink,
 	deleteGroupEduc,
 	deleteGroupWork,
+	deleteGroupProjects,
+	deleteGroupLinks,
+	addDeveloper
 } from "./signupAction";
 
 const allActions = {
@@ -16,6 +19,9 @@ const allActions = {
 	addLink,
 	deleteGroupEduc,
 	deleteGroupWork,
+	deleteGroupProjects,
+	deleteGroupLinks,
+	addDeveloper
 };
 
 export default allActions;

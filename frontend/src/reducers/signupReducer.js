@@ -1,3 +1,12 @@
+export const developer = (state = {}, action) => {
+	switch (action.type) {
+	case "ADD_DEV":
+		return {...state, ...action.payload};
+	default:
+		return state;
+	}
+};
+
 export const education = (state = [], action) => {
 	switch (action.type) {
 	case "ADD_EDUCATION":

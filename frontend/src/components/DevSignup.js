@@ -1,18 +1,16 @@
 import React, { useState } from "react";
-//packages
-// import styled from "styled-components";
+import axios from "axios";
 //components
 import { toast } from "react-toastify";
 import LangContainers from "../components/LangContainers";
 import InputExperienceComp from "../components/InputExperienceComp";
 import EducWorkComp from "../components/EducWorkComp";
 import InputLinksComp from "../components/InputLinksComp";
-import TextareaComp from "../components/TextareaComp";
-import { StyBtn, StyInput } from "../components/GlobalStyles";
+import { StyBtn, StyInput, StyTextarea } from "../components/GlobalStyles";
 //utils
 import { languagesData } from "../utils/languagesData";
-// //redux
-// import { useDispatch, useSelector } from "react-redux";
+//redux
+import { useSelector } from "react-redux";
 // import allActions from "../actions/index";
 
 const DevSignup = () => {
@@ -20,6 +18,45 @@ const DevSignup = () => {
 	const [languages, setLanguages] = useState([]);
 	const [city, setCity] = useState("");
 	const [country, setCountry] = useState("");
+	const [projDescrip, setProjDescrip ] = useState("");
+	const developer = useSelector (store => store.developer);
+	const education = useSelector (store => store.education);
+	const work = useSelector (store => store.work);
+	const socialLinks = useSelector (store => store.socialLinks);
+	const portfolio = useSelector (store => store.portfolio);
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		const bio = e.target.children[0].value;			//get bio input
+		education.forEach(group => delete group.id);
+		work.forEach(group => delete group.id);
+		portfolio.forEach(project => delete project.id );
+
+		let linksArray = [];
+		socialLinks.forEach(socialLink => linksArray.push(socialLink.link));
+		
+		const update = {...developer, profile: {
+			...developer.profile,
+			spokenLangs: languages,
+			homeLocation: {
+				city,
+				country
+			},
+			education,
+			workExp: work,
+			bio,
+			socialLinks: linksArray,
+			portfolio,
+		}};
+		console.log(update);
+		try {
+			const res = await axios.patch(`http://localhost:5000/api/developers/${developer._id}`,update);
+			console.log(res);
+			// history.push("/profile");
+		} catch (error) {
+			console.log(error);
+		}
+	};
 
 	const handleLanguagesInput = (target) => {
 		if (target.value.indexOf(",") !== -1) {
@@ -41,8 +78,14 @@ const DevSignup = () => {
 		}
 	};
 	return (
-		<form>
-			<TextareaComp placeholder="Add your bio." maxLength={120} />
+		<form onSubmit={(e) => handleSubmit(e)}>
+			<StyTextarea
+				// onChange={(e) => console.log(e.target)}
+				rows="4"
+				cols="30"
+				placeholder="Add your bio"
+				maxLength={120}
+			></StyTextarea>
 			<StyInput
 				onChange={({ target }) => setCity(target.value)}
 				type="text"
@@ -83,10 +126,14 @@ const DevSignup = () => {
 					placeholders={["Link to Github", "Link to a live demo"]}
 					type="projects"
 				>
-					<TextareaComp
+					<StyTextarea
+						rows="4"
+						cols="30"
 						placeholder="Describe in a few words your project."
 						maxLength={120}
-					/>
+						projDescrip={projDescrip}
+						onChange={({target}) => setProjDescrip(target.value)}
+					></StyTextarea>
 				</InputLinksComp>
 			</InputExperienceComp>
 			<InputExperienceComp title="Social links">
@@ -101,5 +148,6 @@ const DevSignup = () => {
 		</form>
 	);
 };
+
 
 export default DevSignup;

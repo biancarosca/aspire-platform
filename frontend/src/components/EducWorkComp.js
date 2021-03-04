@@ -70,7 +70,7 @@ const EducWorkComp = ({ id, placeholder1, placeholder2, type }) => {
 			dispatch(
 				allActions.addWork({
 					company: firstInp,
-					degree: secondInp,
+					jobTitle: secondInp,
 					period: [start, end],
 					id,
 				})

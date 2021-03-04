@@ -1,3 +1,8 @@
+export const addDeveloper = (devObj) => {
+	const action = { type: "ADD_DEV", payload: devObj };
+	return action;
+};
+
 export const addEducation = (educObj) => {
 	const action = { type: "ADD_EDUCATION", payload: educObj };
 	return action;
@@ -27,3 +32,15 @@ export const deleteGroupWork = (id) => {
 	const action = { type: "DELETE_WORK", payload: id };
 	return action;
 };
+
+
+export const deleteGroupProjects = (id) => {
+	const action = { type: "DELETE_PROJ", payload: id };
+	return action;
+};
+
+export const deleteGroupLinks = (id) => {
+	const action = { type: "DELETE_LINK", payload: id };
+	return action;
+};
+

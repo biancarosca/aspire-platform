@@ -11,6 +11,9 @@ import RoleChoice from "../components/RoleChoice";
 import axios from "axios";
 //packages
 import { toast } from "react-toastify";
+//redux
+import { useDispatch } from "react-redux";
+import allActions from "../actions/index";
 
 const SignupPage = () => {
 	const [firstName, setFirstName] = useState("");
@@ -20,6 +23,7 @@ const SignupPage = () => {
 	const [confirmPsw, setConfirmPsw] = useState("");
 	const role = useSelector(store => store.pickedRole);
 	const history = useHistory();
+	const dispatch = useDispatch();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -27,16 +31,22 @@ const SignupPage = () => {
 			toast.error("Passwords do not match!");
 			return;
 		}
+		
+		const dev = {
+			email,
+			password,
+			profile: {
+				firstName,
+				lastName,
+			}
+		};
+
 		try {
-			const res = await axios.post(`http://localhost:5000/api/${role}s`, {
-				email,
-				password,
-				profile: {
-					firstName,
-					lastName,
-				}
-			});
+			const res = await axios.post(`http://localhost:5000/api/${role}s`,dev);
 			console.log(res);
+			//store developer in redux
+			dispatch(allActions.addDeveloper(res.data));
+
 			history.push("/profile");
 		} catch (error) {
 			console.log(error);

@@ -1,9 +1,9 @@
 const express = require("express");
 const router = new express.Router();
-// const Developer = require("../models/devModel");
 const createDeveloper = require("../controllers/createDeveloper");
+const updateDeveloper = require("../controllers/updateDeveloper");
 
 router.post("/developers", createDeveloper);
-router.get("/developers", (req, res) => res.send("got it"));
+router.patch("/developers/:id", updateDeveloper);
 
 module.exports = router;

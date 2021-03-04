@@ -40,6 +40,12 @@ const AddFieldsOnClick = ({ id, setNumFields, children, type }) => {
 		} else if (type === "Work experience") {
 			dispatch(allActions.deleteGroupWork(id));
 		}
+		else if (type === "Personal projects"){
+			dispatch(allActions.deleteGroupProjects(id));
+		}
+		else if (type === "Social links"){
+			dispatch(allActions.deleteGroupLinks(id));
+		}
 
 		setAnim(unmountAnim);
 		//make sure the animation happens before unmounting

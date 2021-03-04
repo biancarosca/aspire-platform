@@ -2,9 +2,8 @@ import React, { useState } from "react";
 //packages
 import styled from "styled-components";
 //components
-import { StyInput, StyBtn } from "../components/GlobalStyles";
+import { StyInput, StyBtn, StyTextarea } from "../components/GlobalStyles";
 import { StyRadioInput, StyRadioInpWrap } from "../components/GlobalStyles";
-import TextareaComp from "../components/TextareaComp";
 
 const RecruiterSignup = () => {
 	const [compSize, setCompSize] = useState("Small(1-100 employees)");
@@ -36,10 +35,12 @@ const RecruiterSignup = () => {
 					</StyRadioInpWrap>
 				))}
 			</StyCompanySize>
-			<TextareaComp
+			<StyTextarea
+				rows="4"
+				cols="30"
 				placeholder="Describe the company and its values."
 				maxLength={1000}
-			/>
+			></StyTextarea>
 			<StyBtn className="cta-btn" type="submit">
 				Continue
 			</StyBtn>

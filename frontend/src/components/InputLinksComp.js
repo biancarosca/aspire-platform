@@ -16,12 +16,15 @@ const InputLinksComp = ({ placeholders, children, id, type }) => {
 	const [saved, setSaved] = useState(false);
 	const portfolio = useSelector((store) => store.portfolio);
 	const socialLinks = useSelector((store) => store.socialLinks);
+	const [saveClick, setSaveClick] = useState(false); //the border bottom color should be red only when the user tried to save without completing all the required fields
+	const arrayOfStates = [input0, input1];
 
 	const handleEdit = () => {
 		setSaved(false);
 	};
 
 	const addToState = (target, idx) => {
+		setSaveClick(false); //restore the state
 		switch (idx) {
 		case 0: {
 			setInput0(target.value);
@@ -37,18 +40,19 @@ const InputLinksComp = ({ placeholders, children, id, type }) => {
 	};
 
 	const handleSave = () => {
-		if(type === "links" && !input0)
-			toast.error("All fields are required");
-		else if (type === "projects" && (!input0 || !input1) )
+		setSaveClick(true);
+		if (type === "links" && !input0) toast.error("All fields are required");
+		else if (
+			type === "projects" &&
+			(!input0 || !input1 || !children.props.projDescrip)
+		)
 			toast.error("All fields are required");
 		else {
 			handleInput();
 			setSaved(true);
 			let message;
-			if(type === "projects")
-				message = "Portfolio";
-			else if(type === "links")
-				message = "The social link";
+			if (type === "projects") message = "Portfolio";
+			else if (type === "links") message = "The social link";
 			toast.success(`${message} was successfully saved!`, {
 				position: "top-center",
 				autoClose: 5000,
@@ -62,6 +66,7 @@ const InputLinksComp = ({ placeholders, children, id, type }) => {
 	};
 
 	const handleInput = () => {
+		setSaveClick(false); //restore the state
 		let state;
 		if (type === "projects") state = portfolio;
 		else if (type === "links") state = socialLinks;
@@ -78,6 +83,7 @@ const InputLinksComp = ({ placeholders, children, id, type }) => {
 				allActions.addProject({
 					github: input0,
 					demo: input1,
+					description: children.props.projDescrip,
 					id,
 				})
 			);
@@ -99,11 +105,32 @@ const InputLinksComp = ({ placeholders, children, id, type }) => {
 					placeholder={placeholder}
 					key={placeholder}
 					size="25"
+					disabled={saved ? true : false}
+					style={
+						saved
+							? { backgroundColor: "white", borderBottom: "none" }
+							: arrayOfStates[idx]
+								? {}
+								: saveClick
+									? { borderBottomColor: "#f74040" }
+									: {}
+					}
 					onChange={({ target }) => addToState(target, idx)}
 				/>
 			))}
 
-			{React.Children.toArray(children)}
+			{React.Children.map(children, (child) =>
+				React.cloneElement(child, {
+					disabled: saved ? true : false,
+					style: saved
+						? { backgroundColor: "white" }
+						: children.props.projDescrip
+							? {}
+							: saveClick
+								? { borderColor: "#f74040" }
+								: {},
+				})
+			)}
 			<StyControl
 				onClick={(e) => {
 					e.preventDefault();

@@ -47,6 +47,15 @@ export const StyRadioInput = styled.span`
 	cursor: pointer;
 `;
 
+export const StyTextarea = styled.textarea`
+	resize: none;
+	outline-color: #413feb;
+	font-family: "Poppins", sans-serif;
+	padding: 0.5rem;
+	font-size: 1rem;
+`;
+
+
 export const StyWrapper = styled.div`
 	.cta-btn {
 		transition: all 0.2s ease;

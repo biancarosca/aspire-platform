@@ -35,11 +35,9 @@ const devSchema = new mongoose.Schema(
 					type: [String],
 					validate(value) {
 						value.forEach((element) => {
-							if (typeof element !== String)
+							if (typeof element !== "string")
 								throw new Error("Not an array of strings.");
 						});
-						// if (!value.length > 0)
-						// 	throw new Error("Languages are required.");
 					},
 				},
 				homeLocation: {
@@ -100,13 +98,14 @@ const devSchema = new mongoose.Schema(
 					trim: true,
 				},
 				socialLinks: {
-					type: Array,
+					type: [String],
 					validate(value) {
 						value.forEach((link, idx) => {
 							if (!validator.isURL(link))
 								throw new Error(
 									`URL number ${idx} is not a valid URL!`
 								);
+
 						});
 					},
 				},
