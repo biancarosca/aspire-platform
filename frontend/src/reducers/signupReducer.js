@@ -19,3 +19,25 @@ export const work = (state = [], action) => {
 		return state;
 	}
 };
+
+export const portfolio = (state = [], action) => {
+	switch (action.type) {
+	case "ADD_PROJ":
+		return [...state, action.payload];
+	case "DELETE_PROJ":
+		return [...state.filter((group) => group.id !== action.payload)];
+	default:
+		return state;
+	}
+};
+
+export const socialLinks = (state = [], action) => {
+	switch (action.type) {
+	case "ADD_LINK":
+		return [...state, action.payload];
+	case "DELETE_LINK":
+		return [...state.filter((group) => group.id !== action.payload)];
+	default:
+		return state;
+	}
+};

@@ -44,7 +44,7 @@ const EducWorkComp = ({ id, placeholder1, placeholder2, type }) => {
 	};
 
 	const handleInput = () => {
-		// "Done" button was clicked, values can be sent to store
+		// "Save" button was clicked, values can be sent to store
 		setSaveClick(false); 		//restore the state 
 		let state;
 		if (type === "education") state = education;
@@ -183,7 +183,6 @@ const StyControl = styled(StyBtn)`
 	width: fit-content;
 	padding: 0.5rem 1rem;
 	margin: 0;
-	align-self: flex-end;
 	transition: all 0.2s ease;
 	transform-origin: left center;
 	&:hover {

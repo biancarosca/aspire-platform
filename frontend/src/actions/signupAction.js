@@ -8,6 +8,16 @@ export const addWork = (workObj) => {
 	return action;
 };
 
+export const addProject = (projObj) => {
+	const action = { type: "ADD_PROJ", payload: projObj };
+	return action;
+};
+
+export const addLink = (linkObj) => {
+	const action = { type: "ADD_LINK", payload: linkObj };
+	return action;
+};
+
 export const deleteGroupEduc = (id) => {
 	const action = { type: "DELETE_EDUC", payload: id };
 	return action;
