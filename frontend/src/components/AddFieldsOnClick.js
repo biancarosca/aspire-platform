@@ -6,8 +6,11 @@ import { motion } from "framer-motion";
 //components
 import { StyBtn } from "./GlobalStyles";
 import Tooltip from "@material-ui/core/Tooltip";
+//redux
+import { useDispatch } from "react-redux";
+import allActions from "../actions/index";
 
-const AddFieldsOnClick = ({ id, setNumFields, children }) => {
+const AddFieldsOnClick = ({ id, setNumFields, children, type }) => {
 	const mountingAnim = {
 		initial: { opacity: 0 },
 		final: { opacity: 1 },
@@ -24,10 +27,22 @@ const AddFieldsOnClick = ({ id, setNumFields, children }) => {
 			},
 		},
 	};
+
+	const dispatch = useDispatch();
 	const [anim, setAnim] = useState(mountingAnim);
+
 	const handleRemove = (e) => {
 		e.preventDefault();
+
+		//delete the object with the current id from state
+		if (type === "Education") {
+			dispatch(allActions.deleteGroupEduc(id));
+		} else if (type === "Work experience") {
+			dispatch(allActions.deleteGroupWork(id));
+		}
+
 		setAnim(unmountAnim);
+		//make sure the animation happens before unmounting
 		setTimeout(
 			() =>
 				setNumFields((prev) => prev.filter((currId) => currId !== id)),
@@ -54,6 +69,7 @@ AddFieldsOnClick.propTypes = {
 	id: PropTypes.string,
 	setNumFields: PropTypes.func,
 	children: PropTypes.node,
+	type: PropTypes.string,
 };
 
 const StyControl = styled(StyBtn)`

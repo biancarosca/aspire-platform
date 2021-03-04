@@ -30,6 +30,7 @@ const InputExperienceComp = ({ title, children }) => {
 						key={id}
 						id={id}
 						setNumFields={setNumFields}
+						type={title}
 					>
 						{React.Children.toArray(children)}
 					</AddFieldsOnClick>

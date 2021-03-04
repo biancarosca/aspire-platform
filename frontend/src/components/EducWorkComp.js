@@ -16,6 +16,7 @@ const EducWorkComp = ({ id, placeholder1, placeholder2, type }) => {
 	const [start, setStart] = useState("");
 	const [end, setEnd] = useState("");
 	const [saved, setSaved] = useState(false);
+	const [saveClick, setSaveClick] = useState(false);			//the border bottom color should be red only when the user tried to save without completing all the required fields
 	const education = useSelector((store) => store.education);
 	const work = useSelector((store) => store.work);
 
@@ -24,21 +25,27 @@ const EducWorkComp = ({ id, placeholder1, placeholder2, type }) => {
 	};
 
 	const handleSave = (message) => {
-		handleInput();
-		setSaved(true);
-		toast.success(`${message} was successfully saved!`, {
-			position: "top-center",
-			autoClose: 5000,
-			hideProgressBar: false,
-			closeOnClick: true,
-			pauseOnHover: true,
-			draggable: true,
-			progress: undefined,
-		});
+		setSaveClick(true);
+		if (!firstInp || !secondInp || !start || !end)
+			toast.error("All fields are required");
+		else {
+			handleInput();
+			setSaved(true);
+			toast.success(`${message} was successfully saved!`, {
+				position: "top-center",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+			});
+		}
 	};
 
 	const handleInput = () => {
 		// "Done" button was clicked, values can be sent to store
+		setSaveClick(false); 		//restore the state 
 		let state;
 		if (type === "education") state = education;
 		else state = work;
@@ -76,6 +83,7 @@ const EducWorkComp = ({ id, placeholder1, placeholder2, type }) => {
 				type="text"
 				placeholder={placeholder1}
 				onChange={({ target }) => {
+					setSaveClick(false); 		//restore the state 
 					setFirstInp(target.value);
 				}}
 				size="25"
@@ -83,13 +91,14 @@ const EducWorkComp = ({ id, placeholder1, placeholder2, type }) => {
 				style={
 					saved
 						? { backgroundColor: "white", borderBottom: "none" }
-						: {}
+						: firstInp ? {} : saveClick ? {borderBottomColor: "#f74040"} : {}
 				}
 			/>
 			<StyInput
 				type="text"
 				placeholder={placeholder2}
 				onChange={({ target }) => {
+					setSaveClick(false); 		//restore the state 
 					setSecondInp(target.value);
 				}}
 				size="25"
@@ -97,7 +106,7 @@ const EducWorkComp = ({ id, placeholder1, placeholder2, type }) => {
 				style={
 					saved
 						? { backgroundColor: "white", borderBottom: "none" }
-						: {}
+						: secondInp ? {} : saveClick ? {borderBottomColor: "#f74040"} : {}
 				}
 			/>
 			<label htmlFor="start">Start date</label>
@@ -105,13 +114,14 @@ const EducWorkComp = ({ id, placeholder1, placeholder2, type }) => {
 				type="date"
 				id="start"
 				onChange={({ target }) => {
+					setSaveClick(false); 		//restore the state 
 					setStart(target.value);
 				}}
 				disabled={saved ? true : false}
 				style={
 					saved
 						? { backgroundColor: "white", borderBottom: "none" }
-						: {}
+						: start ? {} : saveClick ? {borderBottomColor: "#f74040"} : {}
 				}
 			/>
 			<label htmlFor="end">End date</label>
@@ -119,13 +129,14 @@ const EducWorkComp = ({ id, placeholder1, placeholder2, type }) => {
 				type="date"
 				id="end"
 				onChange={({ target }) => {
+					setSaveClick(false); 		//restore the state 
 					setEnd(target.value);
 				}}
 				disabled={saved ? true : false}
 				style={
 					saved
 						? { backgroundColor: "white", borderBottom: "none" }
-						: {}
+						: end ? {} : saveClick ? {borderBottomColor: "#f74040"} : {}
 				}
 			/>
 			<StyControl

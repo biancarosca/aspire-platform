@@ -8,5 +8,12 @@ export const addWork = (workObj) => {
 	return action;
 };
 
+export const deleteGroupEduc = (id) => {
+	const action = { type: "DELETE_EDUC", payload: id };
+	return action;
+};
 
-
+export const deleteGroupWork = (id) => {
+	const action = { type: "DELETE_WORK", payload: id };
+	return action;
+};
