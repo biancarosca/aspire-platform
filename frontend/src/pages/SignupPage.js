@@ -57,8 +57,7 @@ const SignupPage = () => {
 				`http://localhost:5000/api/${role}s`,
 				dev
 			);
-			//store developer in redux, but delete password before
-			delete res.data.password;
+			//store developer in redux
 			dispatch(allActions.addDeveloper(res.data));
 			console.log(res);
 			history.push("/profile");

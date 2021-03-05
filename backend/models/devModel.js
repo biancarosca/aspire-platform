@@ -1,5 +1,8 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
+const bcrypt = require("bcryptjs");
+require("dotenv").config();
+const jwt = require("jsonwebtoken");
 
 const devSchema = new mongoose.Schema(
 	{
@@ -19,6 +22,12 @@ const devSchema = new mongoose.Schema(
 			required: true,
 			minlength: [6, "The password must have at least 6 characters"],
 		},
+		tokens: [{
+			token: {
+				type: String,
+				required:true,
+			}
+		}],
 		profile: {
 			type: new mongoose.Schema({
 				firstName: {
@@ -147,6 +156,26 @@ const devSchema = new mongoose.Schema(
 	},
 	{ timestamps: true }
 );
+
+//before saving to db hash the password
+devSchema.pre("save", async function(next) {
+	const dev = this;
+
+	if(dev.isModified("password"))
+		dev.password = await bcrypt.hash(dev.password, 8);
+	
+	next();
+});
+
+devSchema.methods.generateAuthToken = async function () {
+	const dev = this;
+	const token = jwt.sign({ _id: dev._id.toString() }, process.env.ACCESS_TOKEN_SECRET );
+
+	dev.tokens = dev.tokens.concat({ token });
+	await dev.save();
+
+	return token;
+};
 
 const Developer = new mongoose.model("Developer", devSchema);
 
