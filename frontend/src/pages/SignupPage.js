@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 //components
-import { StyWrapper, StyBtn, StyInput,StyContainer } from "../components/GlobalStyles";
+import {
+	StyWrapper,
+	StyBtn,
+	StyInput,
+	StyContainer,
+} from "../components/GlobalStyles";
 import LandingNav from "../components/LandingNav";
 import styled from "styled-components";
 import CTAbtn from "../components/CTAbtn";
@@ -19,37 +24,58 @@ const SignupPage = () => {
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
 	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [confirmPsw, setConfirmPsw] = useState("");
-	const role = useSelector(store => store.pickedRole);
+	const role = useSelector((store) => store.pickedRole);
+	const [validEmail, setValidEmail] = useState(true);
+	const [validPswd, setValidPswd] = useState(true);
 	const history = useHistory();
 	const dispatch = useDispatch();
+	//use ref because I don't want to store password in state but send it directly to backend
+	const pswdEl = useRef(null);
+	const confirmPswdEl = useRef(null);
 
 	const handleSubmit = async (e) => {
+		//reset email & password to valid before another validation to remove red border
+		setValidPswd(true);
+		setValidEmail(true);
+
 		e.preventDefault();
-		if (password !== confirmPsw){
+		if (pswdEl.current.value !== confirmPswdEl.current.value) {
 			toast.error("Passwords do not match!");
 			return;
 		}
-		
+
 		const dev = {
 			email,
-			password,
+			password: pswdEl.current.value,
 			profile: {
 				firstName,
 				lastName,
-			}
+			},
 		};
-
 		try {
-			const res = await axios.post(`http://localhost:5000/api/${role}s`,dev);
-			console.log(res);
-			//store developer in redux
+			const res = await axios.post(
+				`http://localhost:5000/api/${role}s`,
+				dev
+			);
+			//store developer in redux, but delete password before
+			delete res.data.password;
 			dispatch(allActions.addDeveloper(res.data));
-
+			console.log(res);
 			history.push("/profile");
 		} catch (error) {
-			console.log(error);
+			if (error.response && error.response.data.message) {
+				const errorMessage = error.response.data.message.replace(
+					error.response.data._message + ": ",
+					""
+				);
+				const splitMessage = errorMessage.split(","); //get individual error
+				splitMessage.forEach((message) => {
+					const individualMessage = message.split(":");
+					toast.error(individualMessage[1]);
+				});
+				if (errorMessage.includes("email")) setValidEmail(false);
+				if (errorMessage.includes("password")) setValidPswd(false);
+			}
 		}
 	};
 	return (
@@ -71,39 +97,64 @@ const SignupPage = () => {
 						<RoleChoice roleName="recruiter" />
 					</div>
 					<form onSubmit={handleSubmit}>
-						<StyInput required onChange={({target}) => setFirstName(target.value)}
+						<StyInput
+							required
+							onChange={({ target }) =>
+								setFirstName(target.value)
+							}
 							type="text"
 							placeholder="First name"
 							size="25"
 							value={firstName}
 						/>
-						<StyInput required onChange={({target}) => setLastName(target.value)}
+						<StyInput
+							required
+							onChange={({ target }) => setLastName(target.value)}
 							type="text"
 							placeholder="Last name"
 							size="25"
 							value={lastName}
 						/>
-						<StyInput required onChange={({target}) => setEmail(target.value)}
-							type="text" 
-							placeholder="Email" 
+						<StyInput
+							required
+							onChange={({ target }) => setEmail(target.value)}
+							type="text"
+							placeholder="Email"
 							size="25"
-							value={email} 
+							value={email}
+							style={
+								validEmail
+									? {}
+									: { borderBottomColor: "#f74040" }
+							}
 						/>
-						<StyInput required onChange={({target}) => setPassword(target.value)}
+						<StyInput
+							required
 							type="password"
 							placeholder="Password"
 							size="25"
 							name="password"
 							autoComplete="on"
-							value={password}
+							ref={pswdEl}
+							style={
+								validPswd
+									? {}
+									: { borderBottomColor: "#f74040" }
+							}
 						/>
-						<StyInput required onChange={({target}) => setConfirmPsw(target.value)}
+						<StyInput
+							required
 							type="password"
 							placeholder="Confirm password"
 							size="25"
 							name="password"
 							autoComplete="on"
-							value={confirmPsw}
+							ref={confirmPswdEl}
+							style={
+								validPswd
+									? {}
+									: { borderBottomColor: "#f74040" }
+							}
 						/>
 						<StyBtn className="cta-btn" type="submit">
 							Continue

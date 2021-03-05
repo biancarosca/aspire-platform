@@ -23,6 +23,11 @@ export const addLink = (linkObj) => {
 	return action;
 };
 
+export const addAvatar = (avatar) => {
+	const action = { type: "ADD_AVATAR", payload: avatar };
+	return action;
+};
+
 export const deleteGroupEduc = (id) => {
 	const action = { type: "DELETE_EDUC", payload: id };
 	return action;

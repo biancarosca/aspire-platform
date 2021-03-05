@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 //components
 import { toast } from "react-toastify";
@@ -24,6 +25,8 @@ const DevSignup = () => {
 	const work = useSelector (store => store.work);
 	const socialLinks = useSelector (store => store.socialLinks);
 	const portfolio = useSelector (store => store.portfolio);
+	const avatar = useSelector (store => store.avatar);
+	const history = useHistory();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -31,7 +34,7 @@ const DevSignup = () => {
 		education.forEach(group => delete group.id);
 		work.forEach(group => delete group.id);
 		portfolio.forEach(project => delete project.id );
-
+		//make an array with the input social links
 		let linksArray = [];
 		socialLinks.forEach(socialLink => linksArray.push(socialLink.link));
 		
@@ -47,12 +50,12 @@ const DevSignup = () => {
 			bio,
 			socialLinks: linksArray,
 			portfolio,
+			avatar,
 		}};
 		console.log(update);
 		try {
-			const res = await axios.patch(`http://localhost:5000/api/developers/${developer._id}`,update);
-			console.log(res);
-			// history.push("/profile");
+			await axios.patch(`http://localhost:5000/api/developers/${developer._id}`,update);
+			history.push("/dashboard");
 		} catch (error) {
 			console.log(error);
 		}
@@ -80,7 +83,6 @@ const DevSignup = () => {
 	return (
 		<form onSubmit={(e) => handleSubmit(e)}>
 			<StyTextarea
-				// onChange={(e) => console.log(e.target)}
 				rows="4"
 				cols="30"
 				placeholder="Add your bio"

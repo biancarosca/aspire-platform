@@ -10,6 +10,7 @@ import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import CreateProfile from "./pages/CreateProfile";
+import Dashboard from "./pages/Dashboard";
 
 
 function App() {
@@ -26,6 +27,9 @@ function App() {
 				</Route>
 				<Route path="/profile" exact>
 					<CreateProfile />
+				</Route>
+				<Route path="/dashboard" exact>
+					<Dashboard />
 				</Route>
 				<Route path="/" exact>
 					<LandingPage />

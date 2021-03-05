@@ -50,3 +50,12 @@ export const socialLinks = (state = [], action) => {
 		return state;
 	}
 };
+
+export const avatar = (state = "", action) => {
+	switch (action.type) {
+	case "ADD_AVATAR":
+		return action.payload;
+	default:
+		return state;
+	}
+};

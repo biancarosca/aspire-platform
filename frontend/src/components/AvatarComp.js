@@ -8,11 +8,15 @@ import { toast } from "react-toastify";
 import Avatar from "react-avatar-edit";
 //assets
 import defaultPortrait from "../images/portrait.png";
+//redux
+import { useDispatch } from "react-redux";
+import allActions from "../actions/index";
 
 const AvatarComp = () => {
 	const [preview, setPreview] = useState(null);
 	const [edit, setEdit] = useState(true);
 	const role = useSelector((store) => store.pickedRole);
+	const dispatch = useDispatch();
 
 	const onClose = () => {
 		setPreview(null);
@@ -43,6 +47,11 @@ const AvatarComp = () => {
 
 	const handleEdit = () => {
 		setEdit((prev) => !prev);
+		if(preview)
+			dispatch(allActions.addAvatar(preview.preview));
+		else
+			dispatch(allActions.addAvatar(defaultPortrait));
+			
 		const message = role === "developer" ? "Avatar" : "Logo";
 		if (edit) {
 			toast.success(`${message} successfully updated!`, {
