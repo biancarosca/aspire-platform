@@ -22,12 +22,14 @@ const devSchema = new mongoose.Schema(
 			required: true,
 			minlength: [6, "The password must have at least 6 characters"],
 		},
-		tokens: [{
-			token: {
-				type: String,
-				required:true,
-			}
-		}],
+		tokens: [
+			{
+				token: {
+					accessToken: { type: String, required: true },
+					refreshToken: { type: String, required: true },
+				},
+			},
+		],
 		profile: {
 			type: new mongoose.Schema({
 				firstName: {
@@ -114,7 +116,6 @@ const devSchema = new mongoose.Schema(
 								throw new Error(
 									`URL number ${idx} is not a valid URL!`
 								);
-
 						});
 					},
 				},
@@ -158,23 +159,32 @@ const devSchema = new mongoose.Schema(
 );
 
 //before saving to db hash the password
-devSchema.pre("save", async function(next) {
+devSchema.pre("save", async function (next) {
 	const dev = this;
 
-	if(dev.isModified("password"))
+	if (dev.isModified("password"))
 		dev.password = await bcrypt.hash(dev.password, 8);
-	
+
 	next();
 });
 
-devSchema.methods.generateAuthToken = async function () {
+devSchema.methods.generateAuthToken = async function (res) {
 	const dev = this;
-	const token = jwt.sign({ _id: dev._id.toString() }, process.env.ACCESS_TOKEN_SECRET );
+	const accessToken = jwt.sign(
+		{ _id: dev._id.toString() },
+		process.env.ACCESS_TOKEN_SECRET,
+		{ expiresIn: "5m" }
+	);
+	const refreshToken = jwt.sign(
+		{ _id: dev._id.toString() },
+		process.env.REFRESH_TOKEN_SECRET
+	);
 
-	dev.tokens = dev.tokens.concat({ token });
+	dev.tokens = dev.tokens.concat({token: { accessToken, refreshToken }});
 	await dev.save();
+	res.cookie("refresh_token", refreshToken, { httpOnly: true, path: "/" }); //refresh token set in cookie
 
-	return token;
+	return accessToken;
 };
 
 const Developer = new mongoose.model("Developer", devSchema);

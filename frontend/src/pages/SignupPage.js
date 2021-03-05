@@ -55,10 +55,12 @@ const SignupPage = () => {
 		try {
 			const res = await axios.post(
 				`http://localhost:5000/api/${role}s`,
-				dev
+				dev, {withCredentials: true, credentials: "include"}
 			);
 			//store developer in redux
 			dispatch(allActions.addDeveloper(res.data));
+			//store access token in local storage
+			localStorage.setItem("accessToken",res.data.accessToken);
 			console.log(res);
 			history.push("/profile");
 		} catch (error) {

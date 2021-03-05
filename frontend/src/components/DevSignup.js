@@ -10,6 +10,7 @@ import InputLinksComp from "../components/InputLinksComp";
 import { StyBtn, StyInput, StyTextarea } from "../components/GlobalStyles";
 //utils
 import { languagesData } from "../utils/languagesData";
+import trackToken from "../utils/trackToken";
 //redux
 import { useSelector } from "react-redux";
 // import allActions from "../actions/index";
@@ -38,8 +39,8 @@ const DevSignup = () => {
 		let linksArray = [];
 		socialLinks.forEach(socialLink => linksArray.push(socialLink.link));
 		
-		const update = {...developer, profile: {
-			...developer.profile,
+		const update = {...developer.dev, profile: {
+			...developer.dev.profile,
 			spokenLangs: languages,
 			homeLocation: {
 				city,
@@ -52,9 +53,14 @@ const DevSignup = () => {
 			portfolio,
 			avatar,
 		}};
-		console.log(update);
+		//request a new token if the current one expired
+		trackToken();
 		try {
-			await axios.patch(`http://localhost:5000/api/developers/${developer._id}`,update);
+			await axios.patch(`http://localhost:5000/api/developers/${developer.dev._id}`,update, {
+				headers: {
+					Authorization: "Bearer " + developer.accessToken
+				}
+			});
 			history.push("/dashboard");
 		} catch (error) {
 			console.log(error);

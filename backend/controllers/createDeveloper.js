@@ -6,9 +6,9 @@ const createDeveloper = async (req, res) => {
 	try{
 		await dev.save();
 		//once the dev is created, token is generated
-		const token = await dev.generateAuthToken();
+		const accessToken = await dev.generateAuthToken(res);
 		dev.password = undefined;	//remove password from response
-		res.status(201).send({dev,token});
+		res.status(201).send({dev,accessToken});
 	}catch(error){
 		res.status(400).send(error);
 	}

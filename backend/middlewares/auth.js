@@ -11,7 +11,7 @@ const auth = async (req, res, next) => {
 		const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 		const dev = await Developer.findOne({
 			_id: decoded._id,
-			"tokens.token": token,
+			"tokens.token.accessToken": token,
 		});
 
 		if (!dev) throw new Error();
