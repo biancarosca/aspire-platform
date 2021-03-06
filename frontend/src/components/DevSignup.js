@@ -10,10 +10,12 @@ import InputLinksComp from "../components/InputLinksComp";
 import { StyBtn, StyInput, StyTextarea } from "../components/GlobalStyles";
 //utils
 import { languagesData } from "../utils/languagesData";
-import trackToken from "../utils/trackToken";
+import refreshAuthLogic from "../utils/refreshAuthLogic";
 //redux
 import { useSelector } from "react-redux";
 // import allActions from "../actions/index";
+//packages
+import createAuthRefreshInterceptor from "axios-auth-refresh";
 
 const DevSignup = () => {
 	// const dispatch = useDispatch();
@@ -53,8 +55,7 @@ const DevSignup = () => {
 			portfolio,
 			avatar,
 		}};
-		//request a new token if the current one expired
-		trackToken();
+		createAuthRefreshInterceptor(axios, refreshAuthLogic);
 		try {
 			await axios.patch(`http://localhost:5000/api/developers/${developer.dev._id}`,update, {
 				headers: {

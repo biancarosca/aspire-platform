@@ -173,7 +173,7 @@ devSchema.methods.generateAuthToken = async function (res) {
 	const accessToken = jwt.sign(
 		{ _id: dev._id.toString() },
 		process.env.ACCESS_TOKEN_SECRET,
-		{ expiresIn: "5m" }
+		{ expiresIn: "15s" }
 	);
 	const refreshToken = jwt.sign(
 		{ _id: dev._id.toString() },

@@ -1,4 +1,10 @@
-export const developer = (state = {}, action) => {
+let initialState;
+if(localStorage.getItem("developer"))
+	initialState = JSON.parse(localStorage.getItem("developer"));
+else
+	initialState = {};
+
+export const developer = (state = initialState, action) => {
 	switch (action.type) {
 	case "ADD_DEV":
 		return {...state, ...action.payload};

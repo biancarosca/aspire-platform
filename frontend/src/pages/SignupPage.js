@@ -61,6 +61,8 @@ const SignupPage = () => {
 			dispatch(allActions.addDeveloper(res.data));
 			//store access token in local storage
 			localStorage.setItem("accessToken",res.data.accessToken);
+			//store developer in local storage
+			localStorage.setItem("developer",JSON.stringify(res.data));
 			console.log(res);
 			history.push("/profile");
 		} catch (error) {
