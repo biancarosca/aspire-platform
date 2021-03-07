@@ -1,5 +1,7 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
+//redux
+import { useSelector } from "react-redux";
 //packages
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -14,22 +16,23 @@ import Dashboard from "./pages/Dashboard";
 
 
 function App() {
+	const isLoggedIn = useSelector(store => store.isLoggedIn);
 	return (
 		<div className="App">
 			<GlobalStyles />
 			<ToastContainer position="top-center" autoClose={5000} />
 			<Switch>
 				<Route path="/join" exact>
-					<SignupPage />
+					{!isLoggedIn ? <SignupPage /> : <Redirect to="/" />}
 				</Route>
 				<Route path="/login" exact>
 					<LoginPage />
 				</Route>
 				<Route path="/profile" exact>
-					<CreateProfile />
+					{isLoggedIn ? <CreateProfile /> : <Redirect to="/" />}
 				</Route>
 				<Route path="/dashboard" exact>
-					<Dashboard />
+					{isLoggedIn ? <Dashboard /> : <Redirect to="/login" />}
 				</Route>
 				<Route path="/" exact>
 					<LandingPage />

@@ -59,11 +59,15 @@ const SignupPage = () => {
 			);
 			//store user in redux
 			dispatch(allActions.addUser(res.data));
+			dispatch(allActions.setLogin(true));
 			//store access token in local storage
 			localStorage.setItem("accessToken",res.data.accessToken);
 			//store user in local storage
 			localStorage.setItem("user",JSON.stringify(res.data));
-			console.log(res);
+			
+			//set role in local storage
+			localStorage.setItem("pickedRole",JSON.stringify(role));
+
 			history.push("/profile");
 		} catch (error) {
 			if (error.response && error.response.data.message) {

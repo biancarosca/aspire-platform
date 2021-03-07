@@ -39,7 +39,6 @@ const DevSignup = () => {
 		//make an array with the input social links
 		let linksArray = [];
 		socialLinks.forEach((socialLink) => linksArray.push(socialLink.link));
-
 		const update = {
 			...user.dev,
 			profile: {

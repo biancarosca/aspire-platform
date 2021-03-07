@@ -9,11 +9,6 @@ const RoleChoice = ({ roleName }) => {
 	const dispatch = useDispatch();
 	const role = useSelector((store) => store.pickedRole);
 
-	const handleRoleSelection = () => {
-		dispatch(allActions.pickRole(roleName));
-		localStorage.setItem("pickedRole", JSON.stringify(roleName));
-	};
-
 	return (
 		<StyRadioInpWrap>
 			<StyRadioInput
@@ -22,7 +17,7 @@ const RoleChoice = ({ roleName }) => {
 						? { backgroundColor: "#4347ea" }
 						: { backgroundColor: "white" }
 				}
-				onClick={() => handleRoleSelection(roleName)}
+				onClick={() => dispatch(allActions.pickRole(roleName))}
 			></StyRadioInput>
 			<span className="label">{roleName}</span>
 		</StyRadioInpWrap>

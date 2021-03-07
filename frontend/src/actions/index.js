@@ -10,8 +10,8 @@ import {
 	deleteGroupLinks,
 	addUser,
 	addAvatar,
-	toggleLogin
 } from "./signupAction";
+import { setLogin } from "./loginAction";
 
 const allActions = {
 	pickRole,
@@ -25,7 +25,7 @@ const allActions = {
 	deleteGroupLinks,
 	addUser,
 	addAvatar,
-	toggleLogin
+	setLogin,
 };
 
 export default allActions;

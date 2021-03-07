@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 //packages
 import styled from "styled-components";
@@ -11,6 +11,16 @@ import RecruiterSignup from "../components/RecruiterSignup";
 
 const CreateProfile = () => {
 	const role = useSelector((store) => store.pickedRole);
+
+	//reload alert
+	useEffect(() => {
+		window.onbeforeunload = function () {
+			return true;
+		};
+		return () => {
+			window.onbeforeunload = null;
+		};
+	}, []);
 
 	return (
 		<StyWrapper>

@@ -21,6 +21,9 @@
   },
   "homepage": "https://github.com/biancarosca/aspire-platform#readme",
   "devDependencies": {
+    "@babel/core": "^7.13.8",
+    "@babel/preset-env": "^7.13.9",
+    "babel-loader": "^8.2.2",
     "chalk": "^4.1.0",
     "concurrently": "^6.0.0",
     "eslint": "^7.20.0",
@@ -29,7 +32,8 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.3.1",
     "eslint-plugin-react": "^7.22.0",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "webpack": "^5.24.3"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
