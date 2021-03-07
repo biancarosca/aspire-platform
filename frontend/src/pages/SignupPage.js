@@ -44,7 +44,7 @@ const SignupPage = () => {
 			return;
 		}
 
-		const dev = {
+		const user = {
 			email,
 			password: pswdEl.current.value,
 			profile: {
@@ -55,14 +55,14 @@ const SignupPage = () => {
 		try {
 			const res = await axios.post(
 				`http://localhost:5000/api/${role}s`,
-				dev, {withCredentials: true, credentials: "include"}
+				user, {withCredentials: true, credentials: "include"}
 			);
-			//store developer in redux
-			dispatch(allActions.addDeveloper(res.data));
+			//store user in redux
+			dispatch(allActions.addUser(res.data));
 			//store access token in local storage
 			localStorage.setItem("accessToken",res.data.accessToken);
-			//store developer in local storage
-			localStorage.setItem("developer",JSON.stringify(res.data));
+			//store user in local storage
+			localStorage.setItem("user",JSON.stringify(res.data));
 			console.log(res);
 			history.push("/profile");
 		} catch (error) {

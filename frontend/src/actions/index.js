@@ -8,8 +8,9 @@ import {
 	deleteGroupWork,
 	deleteGroupProjects,
 	deleteGroupLinks,
-	addDeveloper,
-	addAvatar
+	addUser,
+	addAvatar,
+	toggleLogin
 } from "./signupAction";
 
 const allActions = {
@@ -22,8 +23,9 @@ const allActions = {
 	deleteGroupWork,
 	deleteGroupProjects,
 	deleteGroupLinks,
-	addDeveloper,
-	addAvatar
+	addUser,
+	addAvatar,
+	toggleLogin
 };
 
 export default allActions;

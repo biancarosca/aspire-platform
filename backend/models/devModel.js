@@ -180,7 +180,7 @@ devSchema.methods.generateAuthToken = async function (res) {
 		process.env.REFRESH_TOKEN_SECRET
 	);
 
-	dev.tokens = dev.tokens.concat({token: { accessToken, refreshToken }});
+	dev.tokens = dev.tokens.concat({ token: { accessToken, refreshToken } });
 	await dev.save();
 	res.cookie("refresh_token", refreshToken, { httpOnly: true, path: "/" }); //refresh token set in cookie
 

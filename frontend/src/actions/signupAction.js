@@ -1,5 +1,5 @@
-export const addDeveloper = (devObj) => {
-	const action = { type: "ADD_DEV", payload: devObj };
+export const addUser = (userObj) => {
+	const action = { type: "ADD_USER", payload: userObj };
 	return action;
 };
 
@@ -38,7 +38,6 @@ export const deleteGroupWork = (id) => {
 	return action;
 };
 
-
 export const deleteGroupProjects = (id) => {
 	const action = { type: "DELETE_PROJ", payload: id };
 	return action;
@@ -49,3 +48,7 @@ export const deleteGroupLinks = (id) => {
 	return action;
 };
 
+export const toggleLogin = () => {
+	const action = { type: "TOGGLE_LOGIN" };
+	return action;
+};

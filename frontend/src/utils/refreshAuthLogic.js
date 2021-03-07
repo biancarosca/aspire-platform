@@ -7,13 +7,18 @@ const refreshAuthLogic = async (failedRequest) => {
 	const secondsSinceEpoch = Math.round(Date.now() / 1000);
 	const accessToken = localStorage.getItem("accessToken");
 	const decodedToken = jwt_decode(accessToken);
+	const pickedRole = JSON.parse(localStorage.getItem("pickedRole"));
 	if (decodedToken.exp < secondsSinceEpoch) {
-		const developer = JSON.parse(localStorage.getItem("developer"));
-		const id = developer.dev._id;
+		const user = JSON.parse(localStorage.getItem("user"));
+		let id;
+		if(pickedRole === "developer")
+			id = user.dev._id;
+		else
+			id = user.recruiter._id;
 		try {
 			const res = await axios.post(
-				"http://localhost:5000/api/developers/refresh_token",
-				{ id },
+				"http://localhost:5000/api/refresh_token",
+				{ id, pickedRole },
 				{ withCredentials: true, credentials: "include" }
 			);
 			console.log(res);

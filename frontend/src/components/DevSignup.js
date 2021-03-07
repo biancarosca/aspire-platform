@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 //components
@@ -13,7 +13,6 @@ import { languagesData } from "../utils/languagesData";
 import refreshAuthLogic from "../utils/refreshAuthLogic";
 //redux
 import { useSelector } from "react-redux";
-// import allActions from "../actions/index";
 //packages
 import createAuthRefreshInterceptor from "axios-auth-refresh";
 
@@ -22,46 +21,53 @@ const DevSignup = () => {
 	const [languages, setLanguages] = useState([]);
 	const [city, setCity] = useState("");
 	const [country, setCountry] = useState("");
-	const [projDescrip, setProjDescrip ] = useState("");
-	const developer = useSelector (store => store.developer);
-	const education = useSelector (store => store.education);
-	const work = useSelector (store => store.work);
-	const socialLinks = useSelector (store => store.socialLinks);
-	const portfolio = useSelector (store => store.portfolio);
-	const avatar = useSelector (store => store.avatar);
+	const [projDescrip, setProjDescrip] = useState("");
+	const user = useSelector((store) => store.user);
+	const education = useSelector((store) => store.education);
+	const work = useSelector((store) => store.work);
+	const socialLinks = useSelector((store) => store.socialLinks);
+	const portfolio = useSelector((store) => store.portfolio);
+	const avatar = useSelector((store) => store.avatar);
 	const history = useHistory();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const bio = e.target.children[0].value;			//get bio input
-		education.forEach(group => delete group.id);
-		work.forEach(group => delete group.id);
-		portfolio.forEach(project => delete project.id );
+		const bio = e.target.children[0].value; //get bio input
+		education.forEach((group) => delete group.id);
+		work.forEach((group) => delete group.id);
+		portfolio.forEach((project) => delete project.id);
 		//make an array with the input social links
 		let linksArray = [];
-		socialLinks.forEach(socialLink => linksArray.push(socialLink.link));
-		
-		const update = {...developer.dev, profile: {
-			...developer.dev.profile,
-			spokenLangs: languages,
-			homeLocation: {
-				city,
-				country
+		socialLinks.forEach((socialLink) => linksArray.push(socialLink.link));
+
+		const update = {
+			...user.dev,
+			profile: {
+				...user.dev.profile,
+				spokenLangs: languages,
+				homeLocation: {
+					city,
+					country,
+				},
+				education,
+				workExp: work,
+				bio,
+				socialLinks: linksArray,
+				portfolio,
+				avatar,
 			},
-			education,
-			workExp: work,
-			bio,
-			socialLinks: linksArray,
-			portfolio,
-			avatar,
-		}};
+		};
 		createAuthRefreshInterceptor(axios, refreshAuthLogic);
 		try {
-			await axios.patch(`http://localhost:5000/api/developers/${developer.dev._id}`,update, {
-				headers: {
-					Authorization: "Bearer " + developer.accessToken
+			await axios.patch(
+				`http://localhost:5000/api/developers/${user.dev._id}`,
+				{ update, pickedRole: "developer" },
+				{
+					headers: {
+						Authorization: "Bearer " + user.accessToken,
+					},
 				}
-			});
+			);
 			history.push("/dashboard");
 		} catch (error) {
 			console.log(error);
@@ -141,7 +147,7 @@ const DevSignup = () => {
 						placeholder="Describe in a few words your project."
 						maxLength={120}
 						projDescrip={projDescrip}
-						onChange={({target}) => setProjDescrip(target.value)}
+						onChange={({ target }) => setProjDescrip(target.value)}
 					></StyTextarea>
 				</InputLinksComp>
 			</InputExperienceComp>
@@ -157,6 +163,5 @@ const DevSignup = () => {
 		</form>
 	);
 };
-
 
 export default DevSignup;

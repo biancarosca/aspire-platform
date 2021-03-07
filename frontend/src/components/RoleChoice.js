@@ -7,7 +7,12 @@ import { StyRadioInput, StyRadioInpWrap } from "../components/GlobalStyles";
 
 const RoleChoice = ({ roleName }) => {
 	const dispatch = useDispatch();
-	const role = useSelector(store => store.pickedRole);
+	const role = useSelector((store) => store.pickedRole);
+
+	const handleRoleSelection = () => {
+		dispatch(allActions.pickRole(roleName));
+		localStorage.setItem("pickedRole", JSON.stringify(roleName));
+	};
 
 	return (
 		<StyRadioInpWrap>
@@ -17,7 +22,7 @@ const RoleChoice = ({ roleName }) => {
 						? { backgroundColor: "#4347ea" }
 						: { backgroundColor: "white" }
 				}
-				onClick={() => dispatch(allActions.pickRole(roleName))}
+				onClick={() => handleRoleSelection(roleName)}
 			></StyRadioInput>
 			<span className="label">{roleName}</span>
 		</StyRadioInpWrap>
@@ -27,6 +32,5 @@ const RoleChoice = ({ roleName }) => {
 RoleChoice.propTypes = {
 	roleName: PropTypes.string,
 };
-
 
 export default RoleChoice;

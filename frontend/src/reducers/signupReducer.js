@@ -1,12 +1,12 @@
 let initialState;
-if(localStorage.getItem("developer"))
-	initialState = JSON.parse(localStorage.getItem("developer"));
+if(localStorage.getItem("user"))
+	initialState = JSON.parse(localStorage.getItem("user"));
 else
 	initialState = {};
 
-export const developer = (state = initialState, action) => {
+export const user = (state = initialState, action) => {
 	switch (action.type) {
-	case "ADD_DEV":
+	case "ADD_USER":
 		return {...state, ...action.payload};
 	default:
 		return state;
@@ -65,3 +65,5 @@ export const avatar = (state = "", action) => {
 		return state;
 	}
 };
+
+// export const isLoggedIn = (state = false)
