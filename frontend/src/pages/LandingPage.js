@@ -1,35 +1,100 @@
 import React from "react";
+import axios from "axios";
+//assets
 import hero from "../images/hero.jpg";
+//packages
 import styled from "styled-components";
+import createAuthRefreshInterceptor from "axios-auth-refresh";
+import { useCookies } from "react-cookie";
+//components
 import { StyWrapper, StyLinkBtn } from "../components/GlobalStyles";
 import LandingNav from "../components/LandingNav";
 import CTAbtn from "../components/CTAbtn";
+//redux
+import { useSelector, useDispatch } from "react-redux";
+//utils
+import refreshAuthLogic from "../utils/refreshAuthLogic";
+import allActions from "../actions";
 
 const LandingPage = () => {
+	const isLoggedIn = useSelector((store) => store.isLoggedIn);
+	const pickedRole = useSelector((store) => store.pickedRole);
+	const user = useSelector((store) => store.user);
+	const dispatch = useDispatch();
+	const [, removeCookie] = useCookies(["refresh_token"]);
+
+	const handleLogout = async () => {
+		createAuthRefreshInterceptor(axios, refreshAuthLogic);
+		try {
+			await axios.post(
+				"http://localhost:5000/api/logout",
+				{ pickedRole },
+				{
+					headers: {
+						Authorization: "Bearer " + user.accessToken,
+					},
+				}
+			);
+			//delete everything from local storage
+			localStorage.clear();
+			removeCookie("refresh_token");
+			//update state
+			dispatch(allActions.setLogin(false));
+		} catch (error) {
+			console.log(error);
+		}
+	};
 	return (
 		<>
 			<StyWrapper>
 				<LandingNav
-					menuItems={[
-						{ name: "Why Aspire?", path: "#" },
-						{ name: "Log In", path: "/login" },
-					]}
+					menuItems={
+						isLoggedIn
+							? [
+								{ name: "Why Aspire?", path: "#" },
+								{ name: "Dashboard", path: "/dashboard" },
+							]
+							: [
+								{ name: "Why Aspire?", path: "#" },
+								{ name: "Log In", path: "/login" },
+							]
+					}
 				>
-					<CTAbtn />
+					{!isLoggedIn ? (
+						<CTAbtn />
+					) : (
+						<StyLogout onClick={handleLogout}>Log out</StyLogout>
+					)}
 				</LandingNav>
 				<StyledHero>
 					<div className="info">
 						<h1>Fastest link between developers and recruiters.</h1>
 						<div className="cta-btn">
-							<StyLinkBtn to="/join">Get started</StyLinkBtn>
+							{!isLoggedIn && (
+								<StyLinkBtn to="/join">Get started</StyLinkBtn>
+							)}
 						</div>
 					</div>
-					<img src={hero} alt="interview"/>
+					<img src={hero} alt="interview" />
 				</StyledHero>
 			</StyWrapper>
 		</>
 	);
 };
+
+const StyLogout = styled.button`
+	text-decoration: none;
+	background-color: white;
+	cursor: pointer;
+	outline: none;
+	font: inherit;
+	border: none;
+	color: #434246;
+	margin-left: 3rem;
+	&:hover {
+		color: black;
+	}
+`;
 
 const StyledHero = styled.div`
 	display: flex;

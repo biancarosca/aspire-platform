@@ -83,6 +83,10 @@ const SignupPage = () => {
 				if (errorMessage.includes("email")) setValidEmail(false);
 				if (errorMessage.includes("password")) setValidPswd(false);
 			}
+			if (error.response && error.response.data.keyPattern.email){
+				toast.error("An account with the same email exists!");
+				setValidEmail(false);
+			}
 		}
 	};
 	return (

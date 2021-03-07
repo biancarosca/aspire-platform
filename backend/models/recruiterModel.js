@@ -82,7 +82,6 @@ const recruiterSchema = new mongoose.Schema(
 
 // before saving to db hash the password
 recruiterSchema.pre("save", async function (next) {
-	
 	const recruiter = this;
 
 	if (recruiter.isModified("password"))
@@ -91,8 +90,18 @@ recruiterSchema.pre("save", async function (next) {
 	next();
 });
 
-recruiterSchema.methods.generateAuthToken = async function (res) {
+recruiterSchema.statics.findByCredentials = async function (email, password) {
+	try {
+		const recruiter = await Recruiter.findOne({ email });
+		const isMatch = await bcrypt.compare(password, recruiter.password);
+		if(isMatch)
+			return recruiter;
+	} catch {
+		return null;
+	}
+};
 
+recruiterSchema.methods.generateAuthToken = async function (res) {
 	const recruiter = this;
 	const accessToken = jwt.sign(
 		{ _id: recruiter._id.toString() },
@@ -104,7 +113,9 @@ recruiterSchema.methods.generateAuthToken = async function (res) {
 		process.env.REFRESH_TOKEN_SECRET
 	);
 
-	recruiter.tokens = recruiter.tokens.concat({ token: { accessToken, refreshToken } });
+	recruiter.tokens = recruiter.tokens.concat({
+		token: { accessToken, refreshToken },
+	});
 	await recruiter.save();
 	res.cookie("refresh_token", refreshToken, { httpOnly: true, path: "/" }); //refresh token set in cookie
 

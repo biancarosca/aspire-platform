@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
+//components
 import {
 	StyWrapper,
 	StyBtn,
@@ -8,12 +11,48 @@ import {
 import LandingNav from "../components/LandingNav";
 import styled from "styled-components";
 import CTAbtn from "../components/CTAbtn";
+//packages
+import { toast } from "react-toastify";
+//redux
+import { useDispatch } from "react-redux";
+import allActions from "../actions/index";
 
 const LoginPage = () => {
 	const [eyeOpen, setEyeOpen] = useState(false);
+	const passEl = useRef(null);
+	const history = useHistory();
+	const dispatch = useDispatch();
 
 	const toggleEye = () => {
 		setEyeOpen((prev) => !prev);
+	};
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		const email = e.target.children[0].value;
+		const password = passEl.current.value;
+		try {
+			const res = await axios.post(
+				"http://localhost:5000/api/login",
+				{ email, password },
+				{ withCredentials: true, credentials: "include" }
+			);
+			//save to local storage
+			console.log(res);
+			if(res.data.role === "developer")
+				localStorage.setItem("user", JSON.stringify({ dev: res.data.user, accessToken: res.data.token}));
+			else
+				localStorage.setItem("user", JSON.stringify({ recruiter: res.data.user, accessToken: res.data.token}));
+			localStorage.setItem("accessToken", JSON.stringify(res.data.token));
+			localStorage.setItem("pickedRole", JSON.stringify(res.data.role));
+			
+			//login state
+			dispatch(allActions.setLogin(true));
+
+			history.push("/dashboard");
+		} catch (error) {
+			toast.error("Unable to log in");
+		}
 	};
 
 	return (
@@ -30,7 +69,7 @@ const LoginPage = () => {
 				<div className="wrapper">
 					<h1>Welcome!</h1>
 					<h3>Log in to continue</h3>
-					<form>
+					<form onSubmit={(e) => handleSubmit(e)}>
 						<StyInput
 							required
 							type="text"
@@ -41,6 +80,7 @@ const LoginPage = () => {
 							<StyInput
 								required
 								type={eyeOpen ? "text" : "password"}
+								ref={passEl}
 								placeholder="Password"
 								size="25"
 								name="password"

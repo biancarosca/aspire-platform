@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 //packages
 import styled from "styled-components";
 //components
@@ -11,6 +12,7 @@ import RecruiterSignup from "../components/RecruiterSignup";
 
 const CreateProfile = () => {
 	const role = useSelector((store) => store.pickedRole);
+	const history = useHistory();
 
 	//reload alert
 	useEffect(() => {
@@ -33,7 +35,12 @@ const CreateProfile = () => {
 							? "Create your profile"
 							: "Create the company profile"}
 					</h3>
-					<StyBtn className="cta-btn">Or complete later</StyBtn>
+					<StyBtn
+						className="cta-btn"
+						onClick={() => history.push("/dashboard")}
+					>
+						Or complete later
+					</StyBtn>
 					<AvatarComp />
 					{role === "developer" ? <DevSignup /> : <RecruiterSignup />}
 				</div>

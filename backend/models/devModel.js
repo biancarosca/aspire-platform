@@ -168,6 +168,17 @@ devSchema.pre("save", async function (next) {
 	next();
 });
 
+devSchema.statics.findByCredentials = async function (email, password) {
+	try {
+		const dev = await Developer.findOne({ email });
+		const isMatch = await bcrypt.compare(password, dev.password);
+		if(isMatch)
+			return dev;
+	} catch {
+		return null;
+	}
+};
+
 devSchema.methods.generateAuthToken = async function (res) {
 	const dev = this;
 	const accessToken = jwt.sign(
