@@ -1,10 +1,8 @@
 import React from "react";
-// import axios from "axios";
 //assets
 import hero from "../images/hero.jpg";
 //packages
 import styled from "styled-components";
-// import createAuthRefreshInterceptor from "axios-auth-refresh";
 //components
 import { StyWrapper, StyLinkBtn } from "../components/GlobalStyles";
 import LandingNav from "../components/LandingNav";
@@ -12,36 +10,10 @@ import CTAbtn from "../components/CTAbtn";
 import LogoutBtn from "../components/LogoutBtn";
 //redux
 import { useSelector} from "react-redux";
-//utils
-// import refreshAuthLogic from "../utils/refreshAuthLogic";
-// import allActions from "../actions";
 
 const LandingPage = () => {
 	const isLoggedIn = useSelector((store) => store.isLoggedIn);
-	// const pickedRole = useSelector((store) => store.pickedRole);
-	// const user = useSelector((store) => store.user);
-	// const dispatch = useDispatch();
-
-	// const handleLogout = async () => {
-	// 	createAuthRefreshInterceptor(axios, refreshAuthLogic);
-	// 	try {
-	// 		await axios.post(
-	// 			"http://localhost:5000/api/logout",
-	// 			{ pickedRole },
-	// 			{
-	// 				headers: {
-	// 					Authorization: "Bearer " + user.accessToken,
-	// 				},
-	// 			}
-	// 		);
-	// 		//delete everything from local storage
-	// 		localStorage.clear();
-	// 		//update state
-	// 		dispatch(allActions.setLogin(false));
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	}
-	// };
+	
 	return (
 		<>
 			<StyWrapper>

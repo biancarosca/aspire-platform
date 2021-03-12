@@ -13,7 +13,8 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import CreateProfile from "./pages/CreateProfile";
 import DevDashboard from "./pages/DevDashboard";
-
+import JobsPage from "./pages/JobsPage";
+import DevCommunity from "./pages/DevCommunity";
 
 function App() {
 	const isLoggedIn = useSelector(store => store.isLoggedIn);
@@ -33,6 +34,12 @@ function App() {
 				</Route>
 				<Route path="/dashboard" exact>
 					{isLoggedIn ? <DevDashboard /> : <Redirect to="/login" />}
+				</Route>
+				<Route path="/jobs" exact>
+					{isLoggedIn ? <JobsPage /> : <Redirect to="/login" />}
+				</Route>
+				<Route path="/community" exact>
+					{isLoggedIn ? <DevCommunity /> : <Redirect to="/login" />}
 				</Route>
 				<Route path="/" exact>
 					<LandingPage />
