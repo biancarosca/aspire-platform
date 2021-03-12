@@ -26,7 +26,7 @@ function App() {
 					{!isLoggedIn ? <SignupPage /> : <Redirect to="/" />}
 				</Route>
 				<Route path="/login" exact>
-					<LoginPage />
+					{!isLoggedIn ? <LoginPage /> : <Redirect to="/" />}
 				</Route>
 				<Route path="/profile" exact>
 					{isLoggedIn ? <CreateProfile /> : <Redirect to="/" />}

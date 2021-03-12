@@ -5,7 +5,7 @@ import hero from "../images/hero.jpg";
 //packages
 import styled from "styled-components";
 import createAuthRefreshInterceptor from "axios-auth-refresh";
-import { useCookies } from "react-cookie";
+// import { useCookies } from "react-cookie";
 //components
 import { StyWrapper, StyLinkBtn } from "../components/GlobalStyles";
 import LandingNav from "../components/LandingNav";
@@ -21,7 +21,6 @@ const LandingPage = () => {
 	const pickedRole = useSelector((store) => store.pickedRole);
 	const user = useSelector((store) => store.user);
 	const dispatch = useDispatch();
-	const [, removeCookie] = useCookies(["refresh_token"]);
 
 	const handleLogout = async () => {
 		createAuthRefreshInterceptor(axios, refreshAuthLogic);
@@ -37,7 +36,6 @@ const LandingPage = () => {
 			);
 			//delete everything from local storage
 			localStorage.clear();
-			removeCookie("refresh_token");
 			//update state
 			dispatch(allActions.setLogin(false));
 		} catch (error) {

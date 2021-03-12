@@ -1,7 +1,7 @@
 const logout = async (req, res) => {
 	try {
 		req.user.tokens = req.user.tokens.filter((tokenObj) => {
-			return tokenObj.token !== req.token;
+			return tokenObj.token.accessToken !== req.token;
 		});
 		await req.user.save();
 		res.send();
