@@ -94,7 +94,7 @@ export const StyBtn = styled.button`
 	outline: none;
 	color: white;
 	font: inherit;
-	border:none;
+	border: none;
 	background-color: #413feb;
 	margin-top: 1rem;
 	margin-bottom: 1.5rem;

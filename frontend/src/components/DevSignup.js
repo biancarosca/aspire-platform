@@ -68,6 +68,11 @@ const DevSignup = () => {
 				}
 			);
 			history.push("/dashboard");
+			//update local storage
+			const currentData = JSON.parse(localStorage.getItem("user"));
+			currentData.dev.profile = { ...update.profile };
+			console.log(currentData);
+			localStorage.setItem("user", JSON.stringify(currentData));
 		} catch (error) {
 			console.log(error);
 		}

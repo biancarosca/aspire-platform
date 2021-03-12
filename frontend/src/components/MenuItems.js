@@ -31,6 +31,7 @@ MenuItems.propTypes = {
 
 const StyUl = styled.ul`
 	display: flex;
+	align-items: center;
 	list-style-type: none;
 	.join {
 		background-color: #413feb;

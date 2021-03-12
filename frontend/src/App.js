@@ -12,7 +12,7 @@ import LandingPage from "./pages/LandingPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import CreateProfile from "./pages/CreateProfile";
-import Dashboard from "./pages/Dashboard";
+import DevDashboard from "./pages/DevDashboard";
 
 
 function App() {
@@ -32,7 +32,7 @@ function App() {
 					{isLoggedIn ? <CreateProfile /> : <Redirect to="/" />}
 				</Route>
 				<Route path="/dashboard" exact>
-					{isLoggedIn ? <Dashboard /> : <Redirect to="/login" />}
+					{isLoggedIn ? <DevDashboard /> : <Redirect to="/login" />}
 				</Route>
 				<Route path="/" exact>
 					<LandingPage />
