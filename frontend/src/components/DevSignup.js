@@ -59,7 +59,7 @@ const DevSignup = () => {
 		createAuthRefreshInterceptor(axios, refreshAuthLogic);
 		try {
 			await axios.patch(
-				`http://localhost:5000/api/developers/${user.dev._id}`,
+				`https://aspire-platform.herokuapp.com/api/developers/${user.dev._id}`,
 				{ update, pickedRole: "developer" },
 				{
 					headers: {

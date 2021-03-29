@@ -53,7 +53,7 @@ const RecruiterSignup = () => {
 		createAuthRefreshInterceptor(axios, refreshAuthLogic);
 		try {
 			await axios.patch(
-				`http://localhost:5000/api/recruiters/${user.recruiter._id}`,
+				`https://aspire-platform.herokuapp.com/api/recruiters/${user.recruiter._id}`,
 				{ update, pickedRole: "recruiter" },
 				{
 					headers: {

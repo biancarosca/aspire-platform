@@ -54,7 +54,7 @@ const SignupPage = () => {
 		};
 		try {
 			const res = await axios.post(
-				`http://localhost:5000/api/${role}s`,
+				`https://aspire-platform.herokuapp.com/api/${role}s`,
 				user, {withCredentials: true, credentials: "include"}
 			);
 			//store user in redux

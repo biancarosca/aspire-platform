@@ -18,7 +18,7 @@ const LogoutBtn = () => {
 		createAuthRefreshInterceptor(axios, refreshAuthLogic);
 		try {
 			await axios.post(
-				"http://localhost:5000/api/logout",
+				"https://aspire-platform.herokuapp.com/api/logout",
 				{ pickedRole },
 				{
 					headers: {
