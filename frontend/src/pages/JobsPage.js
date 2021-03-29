@@ -40,6 +40,10 @@ const JobsPage = () => {
 				<li style={selectedCategory === "P2P" ? {borderBottom: "2px solid #4347ea"} : {}} onClick={() => setSelectedCategory("P2P")}>P2P</li>
 			</StyListOptions>
 			<JobListing />
+			<JobListing />
+			<JobListing />
+			<JobListing />
+
 		</StyWrapper>
 	);
 };
@@ -48,6 +52,7 @@ const StyListOptions = styled.ul`
 	list-style-type: none;
 	display: flex;
 	margin-left: 1rem;
+	margin-bottom: 1.5rem;
 	li{
 		margin-right: 2rem;
 		font-size: 1.1rem;

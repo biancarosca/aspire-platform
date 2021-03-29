@@ -30,6 +30,7 @@ const LogoutBtn = () => {
 			localStorage.clear();
 			//update state
 			dispatch(allActions.setLogin(false));
+			dispatch(allActions.logout());
 		} catch (error) {
 			console.log(error);
 		}

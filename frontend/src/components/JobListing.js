@@ -18,6 +18,9 @@ const JobListing = () => {
 					<div className="technologies-container">
 						<span>Javascript</span>
 						<span>React</span>
+						<span>Node.js</span>
+						<span>GraphQL</span>
+						<span>Redux</span>
 					</div>
 				</div>
 				<div className="job-info-container">
@@ -101,9 +104,12 @@ const StyJobContainer = styled.div`
 			margin-bottom: 1rem;
 		}
 		.technologies-container {
+			display: flex;
+			flex-wrap: wrap;
 			span {
 				margin-right: 1rem;
-				background-color: #eb953f;
+				margin-bottom: 0.5rem;
+				background-color: #413feb;
 				color: white;
 				border-radius: 5rem;
 				padding: 0 0.3rem;

@@ -12,6 +12,7 @@ import {
 	addAvatar,
 } from "./signupAction";
 import { setLogin } from "./loginAction";
+import { logout } from "./logoutAction";
 
 const allActions = {
 	pickRole,
@@ -26,6 +27,7 @@ const allActions = {
 	addUser,
 	addAvatar,
 	setLogin,
+	logout,
 };
 
 export default allActions;
