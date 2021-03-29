@@ -13,11 +13,13 @@ import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import CreateProfile from "./pages/CreateProfile";
 import DevDashboard from "./pages/DevDashboard";
+import RecruiterDashboard from "./pages/RecruiterDashboard";
 import JobsPage from "./pages/JobsPage";
 import DevCommunity from "./pages/DevCommunity";
 
 function App() {
 	const isLoggedIn = useSelector(store => store.isLoggedIn);
+	const pickedRole = useSelector(store => store.pickedRole);
 	return (
 		<div className="App">
 			<GlobalStyles />
@@ -33,7 +35,7 @@ function App() {
 					{isLoggedIn ? <CreateProfile /> : <Redirect to="/" />}
 				</Route>
 				<Route path="/dashboard" exact>
-					{isLoggedIn ? <DevDashboard /> : <Redirect to="/login" />}
+					{isLoggedIn ? (pickedRole === "developer" ? <DevDashboard /> : <RecruiterDashboard />) : <Redirect to="/login" />}
 				</Route>
 				<Route path="/jobs" exact>
 					{isLoggedIn ? <JobsPage /> : <Redirect to="/login" />}

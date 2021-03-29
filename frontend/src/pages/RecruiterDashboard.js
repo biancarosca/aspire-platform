@@ -7,34 +7,32 @@ import LandingNav from "../components/LandingNav";
 import LogoutBtn from "../components/LogoutBtn";
 //assets
 import defaultPortrait from "../images/portrait.png";
-//redux
-import { useSelector } from "react-redux";
 
-
-const JobsPage = () => {
+const RecruiterDashboard = () => {
+	const greet = () => {
+		const name = JSON.parse(localStorage.getItem("user")).recruiter.profile
+			.firstName;
+		const sanitizedName = name.charAt(0).toUpperCase() + name.slice(1);
+		return sanitizedName;
+	};
 	const user = JSON.parse(localStorage.getItem("user"));
-	const role = useSelector(store => store.pickedRole);
-	const avatar = role === "developer" ?  (user.dev.profile.avatar ? user.dev.profile.avatar : "") : (user.recruiter.profile.avatar ? user.recruiter.profile.avatar : "") ;
+	const avatar = user.recruiter.profile.avatar ? user.recruiter.profile.avatar : "";
+	
 	return (
 		<StyWrapper>
 			<LandingNav
 				menuItems={[
 					{ name: "Dashboard", path: "/dashboard" },
 					{ name: "Jobs", path: "/jobs" },
-					{ name: "Community", path: "/community" },
 				]}
 			>
 				<LogoutBtn />
 				<StyAvatar src={avatar ? avatar : defaultPortrait} />
 			</LandingNav>
-			<ul>
-				<li>Jobs</li>
-				<li>P2P</li>
-			</ul>
+			<h1>Hi, {greet()}!</h1>
 		</StyWrapper>
 	);
 };
-
 
 const StyAvatar = styled.img`
 	width: 30px;
@@ -43,4 +41,4 @@ const StyAvatar = styled.img`
 	margin-left: 2rem;
 `;
 
-export default JobsPage;
+export default RecruiterDashboard;

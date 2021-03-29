@@ -13,7 +13,7 @@ const login = async (req, res) => {
 			req.body.email,
 			req.body.password
 		);
-		if (!dev) return res.status(404).send();
+		if (!dev && !recruiter) return res.status(404).send();
 		//provide authorization
 		let user, role;
 		if (dev) {
