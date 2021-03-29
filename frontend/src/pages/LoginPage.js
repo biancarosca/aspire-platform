@@ -28,7 +28,7 @@ const LoginPage = () => {
 		const password = passEl.current.value;
 		try {
 			const res = await axios.post(
-				"https://aspire-platform.herokuapp.com//api/login",
+				"https://aspire-platform.herokuapp.com/api/login",
 				{ email, password },
 				{ withCredentials: true, credentials: "include" }
 			);
@@ -49,6 +49,9 @@ const LoginPage = () => {
 
 			//login state
 			dispatch(allActions.setLogin(true));
+
+			//user state
+			dispatch(allActions.addUser({ dev: res.data.user, accessToken: res.data.token }));
 
 			//role state
 			dispatch(allActions.pickRole(res.data.role));

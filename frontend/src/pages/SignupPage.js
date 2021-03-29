@@ -2,12 +2,7 @@ import React, { useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 //components
-import {
-	StyWrapper,
-	StyBtn,
-	StyInput,
-	StyContainer,
-} from "../components/GlobalStyles";
+import { StyWrapper, StyBtn, StyInput, StyContainer } from "../components/GlobalStyles";
 import LandingNav from "../components/LandingNav";
 import styled from "styled-components";
 import CTAbtn from "../components/CTAbtn";
@@ -55,21 +50,23 @@ const SignupPage = () => {
 		try {
 			const res = await axios.post(
 				`https://aspire-platform.herokuapp.com/api/${role}s`,
-				user, {withCredentials: true, credentials: "include"}
+				user,
+				{ withCredentials: true, credentials: "include" }
 			);
 			//store user in redux
 			dispatch(allActions.addUser(res.data));
 			dispatch(allActions.setLogin(true));
 			//store access token in local storage
-			localStorage.setItem("accessToken",res.data.accessToken);
+			localStorage.setItem("accessToken", res.data.accessToken);
 			//store user in local storage
-			localStorage.setItem("user",JSON.stringify(res.data));
-			
+			localStorage.setItem("user", JSON.stringify(res.data));
+
 			//set role in local storage
-			localStorage.setItem("pickedRole",JSON.stringify(role));
+			localStorage.setItem("pickedRole", JSON.stringify(role));
 
 			history.push("/profile");
 		} catch (error) {
+			console.log(error.response);
 			if (error.response && error.response.data.message) {
 				const errorMessage = error.response.data.message.replace(
 					error.response.data._message + ": ",
@@ -83,7 +80,7 @@ const SignupPage = () => {
 				if (errorMessage.includes("email")) setValidEmail(false);
 				if (errorMessage.includes("password")) setValidPswd(false);
 			}
-			if (error.response && error.response.data.keyPattern.email){
+			if (error.response && error.response.data.keyPattern.email) {
 				toast.error("An account with the same email exists!");
 				setValidEmail(false);
 			}
@@ -110,9 +107,7 @@ const SignupPage = () => {
 					<form onSubmit={handleSubmit}>
 						<StyInput
 							required
-							onChange={({ target }) =>
-								setFirstName(target.value)
-							}
+							onChange={({ target }) => setFirstName(target.value)}
 							type="text"
 							placeholder="First name"
 							size="25"
@@ -133,11 +128,7 @@ const SignupPage = () => {
 							placeholder="Email"
 							size="25"
 							value={email}
-							style={
-								validEmail
-									? {}
-									: { borderBottomColor: "#f74040" }
-							}
+							style={validEmail ? {} : { borderBottomColor: "#f74040" }}
 						/>
 						<StyInput
 							required
@@ -147,11 +138,7 @@ const SignupPage = () => {
 							name="password"
 							autoComplete="on"
 							ref={pswdEl}
-							style={
-								validPswd
-									? {}
-									: { borderBottomColor: "#f74040" }
-							}
+							style={validPswd ? {} : { borderBottomColor: "#f74040" }}
 						/>
 						<StyInput
 							required
@@ -161,11 +148,7 @@ const SignupPage = () => {
 							name="password"
 							autoComplete="on"
 							ref={confirmPswdEl}
-							style={
-								validPswd
-									? {}
-									: { borderBottomColor: "#f74040" }
-							}
+							style={validPswd ? {} : { borderBottomColor: "#f74040" }}
 						/>
 						<StyBtn className="cta-btn" type="submit">
 							Continue

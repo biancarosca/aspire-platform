@@ -13,7 +13,7 @@ const LogoutBtn = () => {
 	const dispatch = useDispatch();
 	const pickedRole = useSelector((store) => store.pickedRole);
 	const user = useSelector((store) => store.user);
-
+	console.log(user);
 	const handleLogout = async () => {
 		createAuthRefreshInterceptor(axios, refreshAuthLogic);
 		try {
